@@ -1,5 +1,5 @@
 QMK_ROOT = ../qmk_firmware
-KEYMAP = nic
+DEFAULT_KEYMAP = nic
 KEYMAPS = $(filter-out handwired%, $(dir $(wildcard */.)))
 HANDWIRED = $(dir $(wildcard ./handwired/*/))
 
@@ -10,11 +10,13 @@ link-handwired: $(foreach name, $(HANDWIRED:./handwired/%/=%), link-handwired-$(
 link: link-keymaps link-handwired
 
 link-keymap-%:
-	ln -sf $(CURDIR)/$* $(QMK_ROOT)/keyboards/$*/keymaps/$(KEYMAP)
+	rm -rf $(QMK_ROOT)/keyboards/$*/keymaps/$(DEFAULT_KEYMAP); \
+	ln -s $(CURDIR)/$* $(QMK_ROOT)/keyboards/$*/keymaps/$(DEFAULT_KEYMAP)
 
 link-handwired-%:
-	ln -sf $(CURDIR)/handwired/$* $(QMK_ROOT)/keyboards/handwired/$*
+	rm -rf $(QMK_ROOT)/keyboards/handwired/$*; \
+	ln -s $(CURDIR)/handwired/$* $(QMK_ROOT)/keyboards/handwired/$*
+
+.PHONY: %
 
 include $(QMK_ROOT)/Makefile
-
-.PHONY: link link-keymaps link-handwired link-keymaps-% link-handwired-%
