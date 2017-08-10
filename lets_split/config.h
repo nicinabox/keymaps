@@ -1,7 +1,7 @@
 #ifndef CONFIG_USER_H
 #define CONFIG_USER_H
 
-#include "../../rev2/config.h"
+#include "../config.h"
 
 #undef RGBLED_NUM
 

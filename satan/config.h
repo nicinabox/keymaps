@@ -1,7 +1,7 @@
 #ifndef CONFIG_USER_H
 #define CONFIG_USER_H
 
-#include "../../config.h"
+#include "../config.h"
 
 #undef RGB_DI_PIN
 #define RGB_DI_PIN B2
