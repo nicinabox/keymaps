@@ -1,4 +1,4 @@
-#include "clueboard.h"
+#include "66.h"
 
 #define QWERTY_LAYER 0
 #define F_LAYER 1
