@@ -26,7 +26,6 @@ enum custom_keycodes {
 #define KC_CTL_ESC CTL_T(KC_ESC)
 #define KC_ALT_TAB LALT_T(KC_TAB)
 #define KC_TMUX LCTL(KC_B)
-#define KC_GBSP LGUI_T(KC_BSPC)
 #define KC_LWR_DEL LT(_LOWER, KC_DEL)
 #define KC_SCR LGUI(LSFT(KC_3))
 #define KC_SCR_SEL LGUI(LSFT(KC_4))
