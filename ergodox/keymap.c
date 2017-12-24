@@ -11,25 +11,29 @@
 
 #define CTL_ESC CTL_T(KC_ESC)
 #define HPR_TAB ALL_T(KC_TAB)
+#define ALT_TAB LALT_T(KC_TAB)
+#define SCR LGUI(LSFT(KC_3))
+#define SCR_SEL LGUI(LSFT(KC_4))
+#define CP_SCR_SEL LGUI(LCTL(LSFT(KC_4)))
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 [DEFAULT] = KEYMAP(
   KC_EQUAL,           KC_1,     KC_2,     KC_3,     KC_4,   KC_5,   KC_ESC,
-  HPR_TAB,            KC_Q,     KC_W,     KC_E,     KC_R,   KC_T,   KC_CAPSLOCK,
+  ALT_TAB,            KC_Q,     KC_W,     KC_E,     KC_R,   KC_T,   KC_HYPR,
   KC_LCTL,            KC_A,     KC_S,     KC_D,     KC_F,   KC_G,
   KC_LSFT,            KC_Z,     KC_X,     KC_C,     KC_V,   KC_B,   KC_GRAVE,
-  _______,            TG(NORMAN),  KC_LALT,  KC_LGUI,  MO(LOWER),
+  KC_CAPS,            _______,  KC_LALT,  KC_LGUI,  MO(LOWER),
 
                                           KC_HOME,  KC_END,
                                                     KC_PGUP,
                                 KC_BSPACE,   F(1),  KC_PGDOWN,
 
 
-    _______,      KC_6,      KC_7,     KC_8,      KC_9,      KC_0,      KC_MINUS,
+    TG(NORMAN),      KC_6,      KC_7,     KC_8,      KC_9,      KC_0,      KC_MINUS,
     KC_LBRC,         KC_Y,      KC_U,     KC_I,      KC_O,      KC_P,      KC_RBRC,
                      KC_H,      KC_J,     KC_K,      KC_L,      KC_SCOLON, KC_QUOTE,
-    MEH_T(KC_BSLS),  KC_N,      KC_M,     KC_COMMA,  KC_DOT,    KC_SLASH,  KC_LSHIFT,
+    MEH_T(KC_BSLS),  KC_N,      KC_M,     KC_COMMA,  KC_DOT,    KC_SLASH,  KC_RSHIFT,
                                 MO(NAV),  KC_LEFT,   KC_DOWN,    KC_UP,    KC_RIGHT,
 
     KC_MEDIA_PLAY_PAUSE,  KC_MEDIA_NEXT_TRACK,
@@ -61,9 +65,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 
 [LOWER] = KEYMAP(
-  _______,          _______,  _______,  _______,  LGUI(LSFT(KC_4)), LGUI(LCTL(LSFT(KC_4))),  _______,
-  LGUI(KC_BSPACE),  KC_EXLM,  KC_AT,    KC_HASH,  KC_DLR,           KC_PERC,                 _______,
-  _______,          _______,  _______,  _______,  _______,          KC_GRAVE,                _______,
+  _______,          _______,  _______,  SCR,  SCR_SEL, CP_SCR_SEL,  _______,
+  LGUI(KC_BSPACE),  _______,  _______,  _______,  _______,          _______,                _______,
+  _______,          _______,  _______,  _______,  _______,          _______,                _______,
   _______,          _______,  _______,  _______,  _______,          _______,
   _______,          _______,  _______,  _______,  _______,
 
@@ -84,9 +88,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 
 [NUMPAD] = KEYMAP(
-  _______,_______,_______,_______,_______,_______,_______,
-  _______,_______,_______,_______,_______,_______,_______,
-  _______,_______,_______,_______,_______,_______,
+  _______,KC_F1  ,KC_F2  ,KC_F3  ,KC_F4  ,KC_F5  ,_______,
+  _______,KC_F6  ,KC_F7  ,KC_F8  ,KC_F9  ,KC_F10 ,_______,
+  _______,KC_F11 ,KC_F12 ,_______,_______,_______,
   _______,_______,_______,_______,_______,_______,_______,
   _______,_______,_______,_______,_______,
 
@@ -107,7 +111,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 [NAV] = KEYMAP(
   _______,  _______,_______,_______,_______,_______,RESET,
-  _______,   _______,_______,_______,_______,_______,_______,
+  _______,  _______,_______,_______,_______,_______,_______,
   _______,_______,_______,_______,_______,_______,
   _______,_______,_______,_______,_______,_______,_______,
   _______,_______,_______,_______,_______,
