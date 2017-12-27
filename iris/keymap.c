@@ -11,16 +11,14 @@ extern keymap_config_t keymap_config;
 
 enum custom_keycodes {
   QWERTY = SAFE_RANGE,
-  LOWER,
   RAISE,
+  LOWER,
   ADJUST,
 };
 
 #define KC_ KC_TRNS
-#define _______ KC_TRNS
 
-#define KC_LOWR LOWER
-#define KC_RASE RAISE
+#define KC_RAISE RAISE
 #define KC_BL_S BL_STEP
 #define KC_CTL_ESC CTL_T(KC_ESC)
 #define KC_ALT_TAB LALT_T(KC_TAB)
@@ -42,7 +40,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|----+----+----+----+----+----+----.    ,----|----+----+----+----+----+----|
      LSFT, Z  , X  , C  , V  , B  ,LALT,     ENT , N  , M  ,COMM,DOT ,SLSH,CAPS,
   //`----+----+----+--+-+----+----+----/    \----+----+----+----+----+----+----'
-                       LGUI,BSPC, LWR_DEL,    ENT ,SPC, RASE
+                       LGUI,BSPC, LWR_DEL,    ENT ,SPC , RAISE
   //                  `----+----+----'        `----+----+----'
   ),
 
@@ -70,7 +68,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|----+----+----+----+----+----+----.    ,----|----+----+----+----+----+----|
          ,    ,    ,    ,    ,    ,    ,         ,    ,    ,LEFT,DOWN,UP,RIGHT,
   //`----+----+----+--+-+----+----+----/    \----+----+----+----+----+----+----'
-                           ,DEL ,    ,             ,    ,
+                           ,    ,    ,             ,    ,
   //                  `----+----+----'        `----+----+----'
   ),
 
