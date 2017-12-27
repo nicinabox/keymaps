@@ -10,8 +10,12 @@
 #define NAV 4
 
 #define CTL_ESC CTL_T(KC_ESC)
+
 #define HPR_TAB ALL_T(KC_TAB)
 #define ALT_TAB LALT_T(KC_TAB)
+
+#define GUI_DEL LT(KC_LGUI, KC_DEL)
+
 #define SCR LGUI(LSFT(KC_3))
 #define SCR_SEL LGUI(LSFT(KC_4))
 #define CP_SCR_SEL LGUI(LCTL(LSFT(KC_4)))
@@ -27,7 +31,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
                                           KC_HOME,  KC_END,
                                                     KC_PGUP,
-                                KC_BSPACE,   F(1),  KC_PGDOWN,
+                                KC_BSPACE, GUI_DEL, KC_PGDOWN,
 
 
     TG(NORMAN),      KC_6,      KC_7,     KC_8,      KC_9,      KC_0,      KC_MINUS,
@@ -38,7 +42,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     KC_MEDIA_PLAY_PAUSE,  KC_MEDIA_NEXT_TRACK,
     KC_AUDIO_VOL_UP,
-    KC_AUDIO_VOL_DOWN,  F(3), F(2)
+    KC_AUDIO_VOL_DOWN,  KC_ENT, KC_SPC
 ),
 
 [NORMAN] = KEYMAP(
@@ -136,16 +140,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 const uint16_t PROGMEM fn_actions[] = {
-  [0] = ACTION_LAYER_TAP_TOGGLE(NAV),
-
-  // Tap for delete, hold for cmd
-  [1] = ACTION_MODS_TAP_KEY(MOD_LGUI, KC_DELETE),
-
-  // Tap for space, hold for shift
-  [2] = ACTION_MODS_TAP_KEY(MOD_LSFT, KC_SPC),
-
-  // Tap for enter, hold for cmd
-  [3] = ACTION_MODS_TAP_KEY(MOD_RGUI, KC_ENTER),
 };
 
 const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
