@@ -21,7 +21,6 @@ enum custom_keycodes {
 
 #define KC_LOWR LOWER
 #define KC_RASE RAISE
-#define KC_RST RESET
 #define KC_BL_S BL_STEP
 #define KC_CTL_ESC CTL_T(KC_ESC)
 #define KC_ALT_TAB LALT_T(KC_TAB)
@@ -41,7 +40,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|----+----+----+----+----+----|              |----+----+----+----+----+----|
      CTL_ESC, A  , S  , D  , F  , G  ,              H , J , K , L , SCLN , QUOT,
   //|----+----+----+----+----+----+----.    ,----|----+----+----+----+----+----|
-     LSFT, Z  , X  , C  , V  , B  ,LALT,     ENT , N  , M  ,COMM,DOT ,SLSH,RSFT,
+     LSFT, Z  , X  , C  , V  , B  ,LALT,     ENT , N  , M  ,COMM,DOT ,SLSH,CAPS,
   //`----+----+----+--+-+----+----+----/    \----+----+----+----+----+----+----'
                        LGUI,BSPC, LWR_DEL,    ENT ,SPC, RASE
   //                  `----+----+----'        `----+----+----'
@@ -49,13 +48,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_LOWER] = KC_KEYMAP(
   //,----+----+----+----+----+----.              ,----+----+----+----+----+----.
-         ,    ,    ,SCR ,SCR_SEL,CP_SCR_SEL,          ,    ,    ,    ,    ,    ,
+     EQL ,    ,    ,SCR ,SCR_SEL,CP_SCR_SEL,          ,    ,    ,    ,    ,    ,
   //|----+----+----+----+----+----|              |----+----+----+----+----+----|
          ,    ,    ,    ,    ,    ,                   ,    ,    ,    ,    ,    ,
   //|----+----+----+----+----+----|              |----+----+----+----+----+----|
          ,    ,    ,    ,    ,    ,                   ,    ,    ,    ,    ,    ,
   //|----+----+----+----+----+----+----.    ,----|----+----+----+----+----+----|
-     CAPS,    ,    ,    ,    ,TMUX,     ,        ,    ,    ,    ,    ,    ,    ,
+         ,    ,    ,    ,    ,TMUX,     ,        ,    ,    ,    ,    ,    ,RSFT,
   //`----+----+----+--+-+----+----+----/    \----+----+----+----+----+----+----'
                            ,     ,     ,            ,    ,
   //                  `----+----+----'        `----+----+----'
@@ -63,13 +62,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_RAISE] = KC_KEYMAP(
   //,----+----+----+----+----+----.              ,----+----+----+----+----+----.
-         , F1 , F2 , F3 , F4 , F5 ,               MPRV,MPLY,MNXT,VOLD,VOLU,EQL,
+     EQL , F1 , F2 , F3 , F4 , F5 ,               MPRV,MPLY,MNXT,VOLD,VOLU,    ,
   //|----+----+----+----+----+----|              |----+----+----+----+----+----|
          , F6 , F7 , F8 , F9 ,F10 ,               PGUP,HOME, UP, END ,    ,RBRC,
   //|----+----+----+----+----+----|              |----+----+----+----+----+----|
          , F11, F12,    ,    ,    ,               PGDN,LEFT,DOWN,RIGHT,   ,BSLS,
   //|----+----+----+----+----+----+----.    ,----|----+----+----+----+----+----|
-     CAPS,    ,    ,    ,    ,    ,    ,         ,    ,    ,LEFT,DOWN,UP,RIGHT,
+         ,    ,    ,    ,    ,    ,    ,         ,    ,    ,LEFT,DOWN,UP,RIGHT,
   //`----+----+----+--+-+----+----+----/    \----+----+----+----+----+----+----'
                            ,DEL ,    ,             ,    ,
   //                  `----+----+----'        `----+----+----'
