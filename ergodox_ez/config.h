@@ -3,4 +3,9 @@
 
 #include "config_common.h"
 
+#undef TAPPING_TERM
+#define TAPPING_TERM 150
+
+#define IGNORE_MOD_TAP_INTERRUPT
+
 #endif

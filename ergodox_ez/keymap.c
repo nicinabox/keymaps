@@ -1,4 +1,4 @@
-#include "ergodox_ez.h"
+#include QMK_KEYBOARD_H
 #include "debug.h"
 #include "action_layer.h"
 #include "version.h"
@@ -10,22 +10,20 @@
 #define NAV 4
 
 #define CTL_ESC CTL_T(KC_ESC)
-
+#define TMUX LCTL(KC_B)
 #define HPR_TAB ALL_T(KC_TAB)
 #define ALT_TAB LALT_T(KC_TAB)
-
 #define GUI_DEL LT(KC_LGUI, KC_DEL)
-
 #define SCR LGUI(LSFT(KC_3))
 #define SCR_SEL LGUI(LSFT(KC_4))
 #define CP_SCR_SEL LGUI(LCTL(LSFT(KC_4)))
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
-[DEFAULT] = KEYMAP(
+[DEFAULT] = LAYOUT_ergodox(
   KC_EQUAL,           KC_1,     KC_2,     KC_3,     KC_4,   KC_5,   KC_ESC,
   ALT_TAB,            KC_Q,     KC_W,     KC_E,     KC_R,   KC_T,   KC_HYPR,
-  KC_LCTL,            KC_A,     KC_S,     KC_D,     KC_F,   KC_G,
+  CTL_ESC,            KC_A,     KC_S,     KC_D,     KC_F,   KC_G,
   KC_LSFT,            KC_Z,     KC_X,     KC_C,     KC_V,   KC_B,   KC_GRAVE,
   KC_CAPS,            _______,  KC_LALT,  KC_LGUI,  MO(LOWER),
 
@@ -45,7 +43,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_AUDIO_VOL_DOWN,  KC_ENT, KC_SPC
 ),
 
-[NORMAN] = KEYMAP(
+[NORMAN] = LAYOUT_ergodox(
   _______,  _______,  _______,  _______,  _______,  _______,  _______,
   _______,  KC_Q,     KC_W,     KC_D,     KC_F,     KC_K,     _______,
   _______,  KC_A,     KC_S,     KC_E,     KC_T,     KC_G,
@@ -68,12 +66,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______,  _______, _______
 ),
 
-[LOWER] = KEYMAP(
+[LOWER] = LAYOUT_ergodox(
   _______,          _______,  _______,  SCR,  SCR_SEL, CP_SCR_SEL,  _______,
   LGUI(KC_BSPACE),  _______,  _______,  _______,  _______,          _______,                _______,
   _______,          _______,  _______,  _______,  _______,          _______,                _______,
   _______,          _______,  _______,  _______,  _______,          _______,
-  _______,          _______,  _______,  _______,  _______,
+  _______,          _______,  _______,  _______,  TMUX,
 
                                                 _______,  _______,
                                                           _______,
@@ -91,7 +89,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   _______, _______, _______
 ),
 
-[NUMPAD] = KEYMAP(
+[NUMPAD] = LAYOUT_ergodox(
   _______,KC_F1  ,KC_F2  ,KC_F3  ,KC_F4  ,KC_F5  ,_______,
   _______,KC_F6  ,KC_F7  ,KC_F8  ,KC_F9  ,KC_F10 ,_______,
   _______,KC_F11 ,KC_F12 ,_______,_______,_______,
@@ -113,7 +111,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   _______, _______, _______
 ),
 
-[NAV] = KEYMAP(
+[NAV] = LAYOUT_ergodox(
   _______,  _______,_______,_______,_______,_______,RESET,
   _______,  _______,_______,_______,_______,_______,_______,
   _______,_______,_______,_______,_______,_______,
