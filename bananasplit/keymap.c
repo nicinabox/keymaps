@@ -1,10 +1,12 @@
 #include "bananasplit.h"
 
-#define DEFAULT_LAYER 0
-#define THUMB_LAYER   1
-#define NORMAN_LAYER  2
-#define NUMS_LAYER    3
-#define MOD_LAYER     4
+#define DEFAULT_LAYER   0
+#define WIN_LAYER       1
+#define THUMB_LAYER     2
+#define NORMAN_LAYER    3
+#define NUMS_LAYER      4
+#define MOD_LAYER       5
+#define WIN_THUMB_LAYER 6
 
 #define CTL_ESC CTL_T(KC_ESC)
 #define HYPR_TAB ALL_T(KC_TAB)
@@ -17,8 +19,24 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_GRV,    KC_1, KC_2, KC_3, KC_4, KC_5, KC_6, KC_7, KC_8, KC_9, KC_0, KC_MINS, KC_EQL, KC_BSLS, KC_DEL,
     HYPR_TAB,  KC_Q,   KC_W,   KC_E,   KC_R,   KC_T,   KC_Y,   KC_U,   KC_I,   KC_O,   KC_P,   KC_LBRC, KC_RBRC, KC_BSPC,
     CTL_ESC,   KC_A,   KC_S,   KC_D,   KC_F,   KC_G,   KC_H,   KC_J,   KC_K,   KC_L,   KC_SCLN,  KC_QUOT, KC_ENT,
-    KC_LSFT,   KC_Z,   KC_X,   KC_C,   KC_V,   KC_B,   KC_N,   KC_M,   KC_COMM,  KC_DOT,  RSFT_T(KC_SLSH),  KC_UP, MO(NUMS_LAYER),
+    KC_LSFT,   KC_Z,   KC_X,   KC_C,   KC_V,   KC_B,   KC_N,   KC_M,   KC_COMM,  KC_DOT,  RSFT_T(KC_SLSH),  KC_UP, TO(WIN_LAYER),
     KC_CAPS,  KC_LALT,  KC_LGUI,  GUI_T(KC_SPC),      MO(THUMB_LAYER),      KC_SPC,  KC_LGUI, KC_RALT,  KC_LEFT, KC_DOWN, KC_RIGHT
+  ),
+
+  [WIN_LAYER] = KEYMAP_HHKB_ARROW(
+    KC_ESC,    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_GRV,
+    KC_TAB,    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+    KC_LCTL,   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+    KC_LSFT,   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, TO(DEFAULT_LAYER),
+    KC_CAPS,  KC_LGUI,  KC_LALT,  KC_SPC,      MO(WIN_THUMB_LAYER),      _______,  KC_LALT, KC_LGUI,  _______, _______, _______
+  ),
+
+  [WIN_THUMB_LAYER] = KEYMAP_HHKB_ARROW(
+    KC_GRV,  KC_F1,  KC_F2,  KC_F3, KC_F4, KC_F5, KC_F6, KC_F7,  KC_F8,   KC_F9,  KC_F10, KC_F11, KC_F12, _______, _______,
+    _______,  _______,  _______,  _______,  _______,   _______,   _______,   _______,   _______,   _______,   _______,   _______, _______, _______,
+    _______,   _______,   _______,   _______,   _______,   _______,   _______,   _______,   _______,   _______, _______,  _______, _______,
+    _______,   _______,   _______,   _______,   _______,   _______,   _______,   _______,    _______,     _______,  _______,  _______, _______,
+    _______,  _______,  _______, _______,      _______,         _______,               _______, _______,  _______, _______, _______
   ),
 
   [THUMB_LAYER] = KEYMAP_HHKB_ARROW(
