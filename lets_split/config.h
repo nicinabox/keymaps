@@ -1,7 +1,7 @@
 #ifndef CONFIG_USER_H
 #define CONFIG_USER_H
 
-#include "../config.h"
+#include "config_common.h"
 
 #undef RGBLED_NUM
 
@@ -14,12 +14,10 @@
 
 #define USE_SERIAL
 #define EE_HANDS
+#define FLIP_HALF
 
 #define randadd 53
 #define randmul 181
 #define randmod 167
-
-#define _______ KC_TRNS
-#define XXXXXXX KC_NO
 
 #endif

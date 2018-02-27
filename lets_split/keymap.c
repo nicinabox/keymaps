@@ -1,5 +1,4 @@
 #include "lets_split.h"
-#include "rekeymap.h"
 #include "action_layer.h"
 #include "eeconfig.h"
 
