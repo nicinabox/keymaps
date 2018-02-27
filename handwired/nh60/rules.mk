@@ -38,7 +38,8 @@ OPT_DEFS += -DINTERRUPT_CONTROL_ENDPOINT
 
 
 # Boot Section Size in *bytes*
-OPT_DEFS += -DBOOTLOADER_SIZE=4096
+# OPT_DEFS += -DBOOTLOADER_SIZE=4096
+BOOTLOADER = halfkay
 
 
 # Build Options
@@ -54,6 +55,3 @@ NKRO_ENABLE ?= yes		# USB Nkey Rollover - if this doesn't work, see here: https:
 BACKLIGHT_ENABLE ?= no  # Enable keyboard backlight functionality
 AUDIO_ENABLE ?= no
 RGBLIGHT_ENABLE ?= no
-
-teensy: build
-	teensy_loader_cli -mmcu=$(MCU) -w $(BUILD_DIR)/$(TARGET).hex
