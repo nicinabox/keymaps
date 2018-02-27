@@ -10,8 +10,8 @@ My keymaps extracted from main QMK repo
 
 Build a keymap
 
-    make KEYMAP:build
+    make build:KEYMAP
 
 Or just flash (also builds)
 
-    make KEYMAP:flash
+    make flash:KEYMAP
