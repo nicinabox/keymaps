@@ -4,4 +4,14 @@ My keymaps extracted from main QMK repo
 
 # Setup
 
-Clone qmk_firmware to sibling directory. Run `make` to link existing keymaps.
+1. Clone qmk_firmware to sibling directory
+
+# Usage
+
+Build a keymap
+
+    make KEYMAP:build
+
+Or just flash (also builds)
+
+    make KEYMAP:flash
