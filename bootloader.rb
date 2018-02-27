@@ -10,10 +10,10 @@ FLASHERS = {
   'halfkay': 'teensy'
 }
 
-def find_bootloader
+def bootloader
   bootloaders = FLASHERS.keys
 
-  ['rules.mk', 'info.json'].map do |filename|
+  ['rules.mk', 'info.json'].each do |filename|
     result = bootloaders.find do |b|
       pattern = Regexp.new b.to_s
       File.foreach("#{KEYBOARD_PATH}/#{filename}").grep(pattern).any?
@@ -22,8 +22,4 @@ def find_bootloader
   end
 end
 
-def flasher(bootloader)
-  FLASHERS[bootloader]
-end
-
-puts flasher(find_bootloader)
+puts FLASHERS[bootloader]
