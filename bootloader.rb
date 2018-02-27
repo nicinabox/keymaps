@@ -3,23 +3,49 @@
 KEYBOARD_PATH = ARGV[0]
 
 FLASHERS = {
-  'lufa-dfu': 'dfu',
-  'qmk-dfu': 'dfu',
-  'atmel-dfu': 'dfu',
-  'caterina': 'avrdude',
-  'halfkay': 'teensy'
+  'dfu': ['lufa-dfu', 'qmk-dfu', 'atmel-dfu'],
+  'avrdude': ['caterina', 'usbasploader'],
+  'teensy': 'halfkay',
 }
 
-def bootloader
-  bootloaders = FLASHERS.keys
+BOOTLOADERS = {
+  'halfkay': ['512', '1024'],
+  'atmel-dfu': '4096',
+  'usbasploader': '2048',
+}
 
-  ['rules.mk', 'info.json'].each do |filename|
-    result = bootloaders.find do |b|
-      pattern = Regexp.new b.to_s
-      File.foreach("#{KEYBOARD_PATH}/#{filename}").grep(pattern).any?
-    end
-    break result if result
+def bootloader_from_size(size)
+  size and BOOTLOADERS.each do |k, v|
+    break k.to_s if v.include? size
   end
 end
 
-puts FLASHERS[bootloader]
+def parse_bootloader_name(filename)
+  name_patterns = Regexp.union(FLASHERS.values.flatten.map {|b| Regexp.new "(#{b})"})
+  value_patterns = Regexp.union(BOOTLOADERS.values.flatten.map {|size| Regexp.new "#{size}"})
+
+  File.open(filename) do |file|
+    file.find do |line|
+      result = line.match(name_patterns)
+      break result[0] if result
+
+      result = line.match(/BOOTLOADER_SIZE=(#{value_patterns})/)
+      break bootloader_from_size(result[1]) if result
+    end
+  end
+end
+
+def bootloader
+  @bootloader ||= begin
+    filename = "#{KEYBOARD_PATH}/rules.mk"
+    parse_bootloader_name(filename) if File.exists? filename
+  end
+end
+
+def flasher
+  bootloader and FLASHERS.each do |k, v|
+    break k if v.include? bootloader
+  end
+end
+
+puts flasher
