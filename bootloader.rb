@@ -16,7 +16,7 @@ BOOTLOADERS = {
 
 def bootloader_from_size(size)
   size and BOOTLOADERS.each do |k, v|
-    break k.to_s if v.include? size
+    break k if v.include? size
   end
 end
 
