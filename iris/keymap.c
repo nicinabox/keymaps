@@ -18,11 +18,12 @@ enum custom_keycodes {
 
 #define KC_ KC_TRNS
 
-#define KC_RAISE RAISE
+#define KC_RASE RAISE
+#define KC_LOWR LOWER
 #define KC_CTL_ESC CTL_T(KC_ESC)
 #define KC_ALT_TAB LALT_T(KC_TAB)
 #define KC_TMUX LCTL(KC_B)
-#define KC_LWR_DEL LT(_LOWER, KC_DEL)
+#define KC_DEL_ALT LALT_T(KC_DEL)
 #define KC_SCR LGUI(LSFT(KC_3))
 #define KC_SCR_SEL LGUI(LSFT(KC_4))
 #define KC_CP_SCR_SEL LGUI(LCTL(LSFT(KC_4)))
@@ -37,9 +38,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|----+----+----+----+----+----|              |----+----+----+----+----+----|
      CTL_ESC, A  , S  , D  , F  , G  ,              H , J , K , L , SCLN , QUOT,
   //|----+----+----+----+----+----+----.    ,----|----+----+----+----+----+----|
-     LSFT, Z  , X  , C  , V  , B  ,LALT,     ENT , N  , M  ,COMM,DOT ,SLSH,CAPS,
+     LSFT, Z  , X  , C  , V  , B  , LOWR,     ENT , N  , M  ,COMM,DOT ,SLSH,CAPS,
   //`----+----+----+--+-+----+----+----/    \----+----+----+----+----+----+----'
-                       LGUI,BSPC,LWR_DEL,     ENT ,SPC , RAISE
+                       LGUI,BSPC,DEL_ALT,     ENT ,SPC , RASE
   //                  `----+----+----'        `----+----+----'
   ),
 
@@ -59,7 +60,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_RAISE] = KC_KEYMAP(
   //,----+----+----+----+----+----.              ,----+----+----+----+----+----.
-     EQL , F1 , F2 , F3 , F4 , F5 ,               MPRV,MPLY,MNXT,VOLD,VOLU,    ,
+     EQL , F1 , F2 , F3 , F4 , F5 ,               MPRV,MPLY,MNXT,VOLD,VOLU,PLUS,
   //|----+----+----+----+----+----|              |----+----+----+----+----+----|
          , F6 , F7 , F8 , F9 ,F10 ,               PGUP,HOME, UP, END ,    ,RBRC,
   //|----+----+----+----+----+----|              |----+----+----+----+----+----|
