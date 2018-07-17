@@ -1,11 +1,12 @@
 # keymaps
 
-My keymaps extracted from main QMK repo
+My keymaps extracted from main QMK repo.
 
-# Setup
-
-1. Install nicinabox/qmk-cli
-
-# Usage
+## Usage
 
     qmk flash KEYBOARD
+
+
+## qmk-cli
+
+This project uses [nicinabox/qmk-cli](https://github.com/nicinabox/qmk-cli).
