@@ -17,6 +17,24 @@ enum custom_keycodes {
 };
 
 #define KC_ KC_TRNS
+#define KC________ KC_TRNS
+
+#define KC_RGB_TOG RGB_TOG
+#define KC_RGB_MOD RGB_MOD
+#define KC_RGB_HUI RGB_HUI
+#define KC_RGB_HUD RGB_HUD
+#define KC_RGB_SAI RGB_SAI
+#define KC_RGB_SAD RGB_SAD
+#define KC_RGB_VAI RGB_VAI
+#define KC_RGB_VAD RGB_VAD
+#define KC_RGB_M_P RGB_M_P
+#define KC_RGB_M_B RGB_M_B
+#define KC_RGB_M_R RGB_M_R
+#define KC_RGB_M_K RGB_M_K
+#define KC_RGB_M_X RGB_M_X
+
+#define KC_RESET RESET
+#define KC_DEBUG DEBUG
 
 #define KC_RASE RAISE
 #define KC_LOWR LOWER
@@ -30,7 +48,7 @@ enum custom_keycodes {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
-  [_QWERTY] = KC_KEYMAP(
+  [_QWERTY] = LAYOUT_kc(
   //,----+----+----+----+----+----.              ,----+----+----+----+----+----.
      GRV , 1  , 2  , 3  , 4  , 5  ,                6  , 7  , 8  , 9 , 0  ,MINS,
   //|----+----+----+----+----+----|              |----+----+----+----+----+----|
@@ -44,7 +62,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //                  `----+----+----'        `----+----+----'
   ),
 
-  [_LOWER] = KC_KEYMAP(
+  [_LOWER] = LAYOUT_kc(
   //,----+----+----+----+----+----.              ,----+----+----+----+----+----.
      PLUS,    ,    ,SCR ,SCR_SEL,CP_SCR_SEL,          ,    ,    ,    ,    ,    ,
   //|----+----+----+----+----+----|              |----+----+----+----+----+----|
@@ -58,7 +76,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //                  `----+----+----'        `----+----+----'
   ),
 
-  [_RAISE] = KC_KEYMAP(
+  [_RAISE] = LAYOUT_kc(
   //,----+----+----+----+----+----.              ,----+----+----+----+----+----.
      EQL , F1 , F2 , F3 , F4 , F5 ,               MPRV,MPLY,MNXT,VOLD,VOLU,PLUS,
   //|----+----+----+----+----+----|              |----+----+----+----+----+----|
@@ -72,7 +90,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //                  `----+----+----'        `----+----+----'
   ),
 
-  [_ADJUST] = KEYMAP(
+  [_ADJUST] = LAYOUT_kc(
   //,--------+--------+--------+--------+--------+--------.                          ,--------+--------+--------+--------+--------+--------.
      _______ , RGB_M_P, RGB_M_B, RGB_M_R, RGB_M_K, RGB_M_X,                           _______ , _______, _______, _______, _______, _______,
   //|--------+--------+--------+--------+--------+--------|                          |--------+--------+--------+--------+--------+--------|
