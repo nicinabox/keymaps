@@ -1,0 +1,9 @@
+keymap: nic
+
+keyboards:
+  bananasplit_blocked: bananasplit
+  clueboard: clueboard/66
+  nh60: handwired/nh60
+
+keymaps:
+  nh60: default
