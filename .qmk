@@ -1,7 +1,8 @@
 keymap: nic
 
 keyboards:
-  bananasplit_blocked: bananasplit
+  bananasplit: thevankeyboards/bananasplit
+  bananasplit_blocked: thevankeyboards/bananasplit
   clueboard: clueboard/66
   nh60: handwired/nh60
 
