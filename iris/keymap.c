@@ -12,7 +12,7 @@ extern keymap_config_t keymap_config;
 enum custom_keycodes {
   QWERTY = SAFE_RANGE,
   RAISE,
-  LOWER,
+  LOWER = LT(_LOWER, KC_DEL),
   ADJUST,
 };
 
@@ -40,6 +40,7 @@ enum custom_keycodes {
 #define KC_LOWR LOWER
 #define KC_CTL_ESC CTL_T(KC_ESC)
 #define KC_ALT_TAB LALT_T(KC_TAB)
+#define KC_GUI_CAPS RGUI_T(KC_CAPS)
 #define KC_TMUX LCTL(KC_B)
 #define KC_DEL_ALT LALT_T(KC_DEL)
 #define KC_SCR LGUI(LSFT(KC_3))
@@ -52,13 +53,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,----+----+----+----+----+----.              ,----+----+----+----+----+----.
      GRV , 1  , 2  , 3  , 4  , 5  ,                6  , 7  , 8  , 9 , 0  ,MINS,
   //|----+----+----+----+----+----|              |----+----+----+----+----+----|
-     ALT_TAB , Q  , W  , E  , R  , T ,              Y  , U  , I , O ,  P  ,LBRC,
+     TAB , Q  , W  , E  , R  , T ,                Y  , U  , I , O ,  P  ,LBRC,
   //|----+----+----+----+----+----|              |----+----+----+----+----+----|
      CTL_ESC, A  , S  , D  , F  , G  ,              H , J , K , L , SCLN , QUOT,
   //|----+----+----+----+----+----+----.    ,----|----+----+----+----+----+----|
-     LSFT, Z  , X  , C  , V  , B  , LOWR,     ENT , N  , M  ,COMM,DOT ,SLSH,CAPS,
+     LSFT, Z  , X  , C  , V  , B  , LOWR,    ENT , N  , M  ,COMM,DOT ,SLSH, GUI_CAPS,
   //`----+----+----+--+-+----+----+----/    \----+----+----+----+----+----+----'
-                       LGUI,BSPC,DEL_ALT,     ENT ,SPC , RASE
+                       LGUI,LALT,BSPC,     ENT ,SPC , RASE
   //                  `----+----+----'        `----+----+----'
   ),
 
@@ -134,7 +135,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         layer_off(_LOWER);
         update_tri_layer(_LOWER, _RAISE, _ADJUST);
       }
-      return false;
       break;
     case RAISE:
       if (record->event.pressed) {
