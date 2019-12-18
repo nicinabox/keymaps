@@ -1,0 +1,102 @@
+#!/usr/bin/env python3
+
+
+import argparse
+import os
+import shutil
+import subprocess
+import getpass
+import sys
+import time
+
+keyboard_path_map = {
+    "bananasplit": "thevankeyboards/bananasplit",
+    "bananasplit_blocked": "thevankeyboards/bananasplit",
+    "clueboard": "clueboard/66",
+    "nh60": "handwired/nh60",
+    "iris": "keebio/iris",
+    "iris_rev4": "keebio/iris/rev4"
+}
+
+keymap = getpass.getuser()
+
+class QmkBuilder(object):
+    def __init__(self, keyboard):
+        self.qmk_root = abs_path("qmk_firmware")
+
+        self.local_config_dir = abs_path(keyboard)
+        self.keyboard_target = keyboard_path_map[keyboard] if keyboard in keyboard_path_map else keyboard
+        self.qmk_config_dir = os.path.join(self.qmk_root, "keyboards", self.keyboard_target, "keymaps", keymap)
+        self.qmk_user_dir = os.path.join(self.qmk_root, "users", keymap)
+
+    def _cleanup(self):
+        if os.path.exists(self.qmk_config_dir):
+            shutil.rmtree(self.qmk_config_dir)
+        if os.path.exists(self.qmk_user_dir):
+            shutil.rmtree(self.qmk_user_dir)
+
+    def __enter__(self):
+        self._cleanup()
+        shutil.copytree(self.local_config_dir, self.qmk_config_dir)
+        return self
+
+    def execute(self, script):
+        subprocess.run(script, cwd=self.qmk_root, stderr=subprocess.STDOUT, shell=True)
+
+    def build(self):
+        self.execute('make {}:{}'.format(self.keyboard_target, keymap))
+
+    def flash(self):
+        self.execute('make {}:{}:flash'.format(self.keyboard_target, keymap))
+
+    def __exit__(self, *_):
+        self._cleanup()
+
+
+def abs_path(*paths):
+    dirname = os.path.abspath(os.path.dirname(__file__))
+    return os.path.join(dirname, *paths)
+
+
+def build(keyboard, flash=False):
+    with QmkBuilder(keyboard) as builder:
+        print("Building {}...".format(keyboard))
+        builder.build()
+
+def flash(keyboard):
+    print("Put your {} into bootlader mode".format(keyboard), end="")
+    for _ in range(0, 3):
+        print(".", end="")
+        sys.stdout.flush()
+        time.sleep(1)
+    print()
+
+    with QmkBuilder(keyboard) as builder:
+        print("Updating {}...".format(keyboard))
+        builder.flash()
+
+
+def main(argv):
+    parser = argparse.ArgumentParser(description="Build util for QMK")
+    parser.add_argument("keyboard", nargs=1)
+    parser.add_argument("command", nargs=1, choices=["build", "flash"])
+    args = parser.parse_args()
+
+    keyboard = args.keyboard[0].strip("/")
+    if not os.path.isdir(abs_path(keyboard)):
+        print("Invalid keyboard: {}".format(keyboard))
+        return 1
+
+    try:
+        command = args.command[0]
+        if command == "build":
+            build(keyboard)
+        elif command == "flash":
+            flash(keyboard)
+    except KeyboardInterrupt:
+        print()
+        print("Aborting.")
+
+
+if __name__ == "__main__":
+    sys.exit(main(sys.argv))
