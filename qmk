@@ -20,7 +20,7 @@ keyboard_path_map = {
     "iris_rev4": "keebio/iris/rev4"
 }
 
-keymap = getpass.getuser()
+user = getpass.getuser()
 
 class QmkBuilder(object):
     def __init__(self, keyboard):
@@ -28,8 +28,8 @@ class QmkBuilder(object):
 
         self.local_config_dir = abs_path(keyboard)
         self.keyboard_target = keyboard_path_map[keyboard] if keyboard in keyboard_path_map else keyboard
-        self.qmk_config_dir = os.path.join(self.qmk_root, "keyboards", self.keyboard_target, "keymaps", keymap)
-        self.qmk_user_dir = os.path.join(self.qmk_root, "users", keymap)
+        self.qmk_config_dir = os.path.join(self.qmk_root, "keyboards", self.keyboard_target, "keymaps", user)
+        self.qmk_user_dir = os.path.join(self.qmk_root, "users", user)
 
     def _cleanup(self):
         if os.path.exists(self.qmk_config_dir):
@@ -43,13 +43,14 @@ class QmkBuilder(object):
         return self
 
     def execute(self, script):
+        print(script)
         subprocess.run(script, cwd=self.qmk_root, stderr=subprocess.STDOUT, shell=True)
 
     def build(self):
-        self.execute('make {}:{}'.format(self.keyboard_target, keymap))
+        self.execute('make {}:{}'.format(self.keyboard_target, user))
 
     def flash(self):
-        self.execute('make {}:{}:flash'.format(self.keyboard_target, keymap))
+        self.execute('make {}:{}:flash'.format(self.keyboard_target, user))
 
     def __exit__(self, *_):
         self._cleanup()
@@ -64,6 +65,7 @@ def build(keyboard, flash=False):
     with QmkBuilder(keyboard) as builder:
         print("Building {}...".format(keyboard))
         builder.build()
+
 
 def flash(keyboard):
     print("Put your {} into bootlader mode".format(keyboard), end="")
