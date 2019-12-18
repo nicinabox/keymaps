@@ -1,4 +1,4 @@
-#include "66.h"
+#include "rev3.h"
 
 #define QWERTY_LAYER 0
 #define WINDOWS_LAYER 1

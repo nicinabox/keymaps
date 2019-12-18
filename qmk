@@ -12,9 +12,11 @@ import time
 keyboard_path_map = {
     "bananasplit": "thevankeyboards/bananasplit",
     "bananasplit_blocked": "thevankeyboards/bananasplit",
-    "clueboard": "clueboard/66",
+    "clueboard": "clueboard/66/rev3",
     "nh60": "handwired/nh60",
-    "iris": "keebio/iris",
+    "tv44": "thevankeyboards/minivan",
+    "ergodox_ez": "ergodox_ez",
+    "iris": "keebio/iris/rev3",
     "iris_rev4": "keebio/iris/rev4"
 }
 
