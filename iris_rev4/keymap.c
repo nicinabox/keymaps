@@ -1,25 +1,5 @@
+#include "nic.h"
 #include QMK_KEYBOARD_H
-
-#define _QWERTY 0
-#define _LOWER 1
-#define _RAISE 2
-#define _ADJUST 3
-
-enum custom_keycodes {
-  QWERTY = SAFE_RANGE,
-  LOWER,
-  RAISE,
-  ADJUST,
-};
-
-#define KC_CTL_ESC CTL_T(KC_ESC)
-#define KC_ALT_TAB LALT_T(KC_TAB)
-#define KC_GUI_CAPS RGUI_T(KC_CAPS)
-#define KC_TMUX LCTL(KC_B)
-#define KC_DEL_ALT LALT_T(KC_DEL)
-#define KC_SCR LGUI(LSFT(KC_3))
-#define KC_SCR_SEL LGUI(LSFT(KC_4))
-#define KC_CP_SCR_SEL LGUI(LCTL(LSFT(KC_4)))
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -27,19 +7,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
      KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                               KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                               KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC,
+     KC_LOWERTAB, KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                               KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
      KC_CTL_ESC, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                               KC_H,    KC_J,    KC_K,    KC_L,  KC_SCLN, KC_QUOT,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_LSFT,   KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_MUTE,           KC_ENT,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, LOWER,
+     KC_LSFT,   KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_MUTE,           KC_ENT,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_CAPS,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
-                                    KC_LGUI,  KC_LALT,  KC_BSPC,                   KC_ENT , KC_SPC , RAISE
+                                    KC_LGUI,  KC_LALT,  KC_BSDEL,                   KC_ENT , KC_SPC , RAISE
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   ),
 
   [_LOWER] = LAYOUT(
     //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
-       KC_PLUS, KC_F1   , KC_F2  , KC_F3  , KC_F4  , KC_F5  ,                           _______, _______, _______, _______, _______, _______,
+       KC_PLUS, _______, _______, KC_SCR, KC_SCR_SEL, KC_CP_SCR_SEL,                    _______, _______, _______, _______, _______, _______,
     //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
        _______, _______, _______, _______, _______, _______,                            _______, _______, _______, _______, _______, _______,
     //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
@@ -65,6 +45,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                   // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   ),
 
+  [_F_KEYS] = LAYOUT(
+    //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
+       KC_PLUS, KC_F1   , KC_F2  , KC_F3  , KC_F4  , KC_F5  ,                           _______, _______, _______, _______, _______, _______,
+    //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
+       _______, _______, _______, _______, _______, _______,                            _______, _______, _______, _______, _______, _______,
+    //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
+       _______, _______, _______, _______, _______, _______,                            _______, _______, _______, _______, _______, _______,
+    //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
+       _______, _______, _______, _______, _______, _______, _______,          _______, _______, _______, _______, _______, _______,  _______,
+    //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
+                                      _______, _______,  _______,                   _______, _______, _______
+                                  // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
+  ),
+
   [_ADJUST] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
      _______, _______, _______, _______, _______, _______,                            _______, _______, _______, _______, _______, _______,
@@ -80,42 +74,30 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   )
 };
 
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+static bool bsdel_mods = false;
+
+bool process_record_keymap(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
-    case QWERTY:
-      if (record->event.pressed) {
-        set_single_persistent_default_layer(_QWERTY);
-      }
-      return false;
-      break;
-    case LOWER:
-      if (record->event.pressed) {
-        layer_on(_LOWER);
-        update_tri_layer(_LOWER, _RAISE, _ADJUST);
-      } else {
-        layer_off(_LOWER);
-        update_tri_layer(_LOWER, _RAISE, _ADJUST);
-      }
-      return false;
-      break;
-    case RAISE:
-      if (record->event.pressed) {
-        layer_on(_RAISE);
-        update_tri_layer(_LOWER, _RAISE, _ADJUST);
-      } else {
-        layer_off(_RAISE);
-        update_tri_layer(_LOWER, _RAISE, _ADJUST);
-      }
-      return false;
-      break;
-    case ADJUST:
-      if (record->event.pressed) {
-        layer_on(_ADJUST);
-      } else {
-        layer_off(_ADJUST);
-      }
-      return false;
-      break;
+      case KC_BSDEL: {
+        uint8_t kc = KC_BSPC;
+
+        if (record->event.pressed) {
+            if (keyboard_report->mods) {
+                kc = KC_DEL;
+            }
+            register_code(kc);
+            bsdel_mods = keyboard_report->mods;
+        }
+        else {
+            if (bsdel_mods) {
+                kc = KC_DEL;
+            }
+            unregister_code(kc);
+        }
+
+        return false;
+        break;
+    }
   }
   return true;
 }
