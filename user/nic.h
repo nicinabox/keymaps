@@ -24,12 +24,14 @@ enum userspace_layers {
 
 #define KC_BSDEL BSPCDEL
 #define KC_LOWERTAB LT(_LOWER, KC_TAB)
+#define KC_HYPER_TAB ALL_T(KC_TAB)
 
 #define KC_TMUX LCTL(KC_B)
 #define KC_CTL_ESC CTL_T(KC_ESC)
 #define KC_ALT_TAB LALT_T(KC_TAB)
 #define KC_GUI_CAPS RGUI_T(KC_CAPS)
 #define KC_DEL_ALT LALT_T(KC_DEL)
+#define KC_RSFT_SLSH RSFT_T(KC_SLSH)
 
 #define KC_SCR LGUI(LSFT(KC_3))
 #define KC_SCR_SEL LGUI(LSFT(KC_4))
