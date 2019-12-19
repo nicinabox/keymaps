@@ -30,13 +30,12 @@ def abs_path(*paths):
 user = getpass.getuser()
 qmk_root = abs_path("qmk_firmware")
 
-
 class QmkBuilder(object):
     def __init__(self, keyboard):
 
-        self.local_keymap_dir = abs_path(keyboard)
         self.local_user_dir = abs_path("user")
 
+        self.local_keymap_dir = abs_path("keymaps", keyboard)
         self.keyboard_target = keyboard_path_map[keyboard] if keyboard in keyboard_path_map else keyboard
         self.qmk_keymap_dir = os.path.join(qmk_root, "keyboards", self.keyboard_target, "keymaps", user)
         self.qmk_user_dir = os.path.join(qmk_root, "users", user)
@@ -82,8 +81,6 @@ def flash(keyboard):
     with QmkBuilder(keyboard) as builder:
         builder.flash()
 
-def show(keyboard):
-    visualizer.visualize(abs_path(keyboard))
 
 def main(argv):
     parser = argparse.ArgumentParser(description="Build util for QMK")
@@ -92,7 +89,7 @@ def main(argv):
     args = parser.parse_args()
 
     keyboard = args.keyboard[0].strip("/")
-    if not os.path.isdir(abs_path(keyboard)):
+    if not os.path.isdir(abs_path("keymaps", keyboard)):
         print("Invalid keyboard: {}".format(keyboard))
         return 1
 
