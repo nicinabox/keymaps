@@ -1,0 +1,4 @@
+BOOTMAGIC_ENABLE = yes
+EXTRAKEY_ENABLE = yes
+
+SRC += nic.c
