@@ -18,7 +18,7 @@ keyboard_path_map = {
     "iris": "keebio/iris/rev3",
     "iris_rev4": "keebio/iris/rev4",
     "nh60": "handwired/nh60",
-    "tv44": "thevankeyboards/minivan",
+    "minivan": "thevankeyboards/minivan",
 }
 
 
