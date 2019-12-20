@@ -13,8 +13,7 @@ My QMK keymaps and utils
 
 ### Submodules
 
-    git submodules update
-    cd qmk_firmware && make git-submodule
+    git submodule update --init --recursive
 
 ## License
 
