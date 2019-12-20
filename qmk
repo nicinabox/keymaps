@@ -15,7 +15,7 @@ keyboard_path_map = {
     "bananasplit_blocked": "thevankeyboards/bananasplit",
     "clueboard": "clueboard/66/rev3",
     "ergodox_ez": "ergodox_ez",
-    "iris": "keebio/iris/rev3",
+    "iris": "keebio/iris/rev2",
     "iris_rev4": "keebio/iris/rev4",
     "nh60": "handwired/nh60",
     "minivan": "thevankeyboards/minivan",
@@ -61,8 +61,8 @@ class QmkBuilder(object):
     def build(self):
         self.execute('make {}:{}'.format(self.keyboard_target, user))
 
-    def flash(self):
-        self.execute('make {}:{}:flash'.format(self.keyboard_target, user))
+    def flash(self, programmer = 'flash'):
+        self.execute('make {}:{}:{}'.format(self.keyboard_target, user, programmer))
 
 
 def build(keyboard, flash=False):
@@ -70,7 +70,7 @@ def build(keyboard, flash=False):
         builder.build()
 
 
-def flash(keyboard):
+def flash(keyboard, programmer):
     print("Put your {} into bootlader mode".format(keyboard), end="")
     for _ in range(0, 3):
         print(".", end="")
@@ -79,13 +79,14 @@ def flash(keyboard):
     print()
 
     with QmkBuilder(keyboard) as builder:
-        builder.flash()
+        builder.flash(programmer)
 
 
 def main(argv):
     parser = argparse.ArgumentParser(description="Build util for QMK")
     parser.add_argument("keyboard", nargs=1)
     parser.add_argument("command", nargs=1, choices=["build", "flash"])
+    parser.add_argument("-p", "--programmer", nargs=1, default="flash", help="optional programmer")
     args = parser.parse_args()
 
     keyboard = args.keyboard[0].strip("/")
@@ -98,7 +99,7 @@ def main(argv):
         if command == "build":
             build(keyboard)
         elif command == "flash":
-            flash(keyboard)
+            flash(keyboard, args.programmer[0])
     except KeyboardInterrupt:
         print()
         print("Aborting.")
