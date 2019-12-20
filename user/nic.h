@@ -14,12 +14,13 @@ enum custom_keycodes {
 
 enum userspace_layers {
     _QWERTY = 0,
+    _WINDOWS,
     _LOWER,
     _RAISE,
-    _F_KEYS,
-    _ADJUST,
     _NORMAN,
     _GAMEPAD,
+    _F_KEYS,
+    _ADJUST,
 };
 
 #define KC_BSDEL BSPCDEL

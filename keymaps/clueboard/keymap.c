@@ -1,8 +1,5 @@
-#include "rev3.h"
-
-#define QWERTY_LAYER 0
-#define WINDOWS_LAYER 1
-#define F_LAYER 10
+#include "nic.h"
+#include QMK_KEYBOARD_H
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   /* Keymap QWERTY_LAYER: (Base Layer) Default Layer
@@ -18,20 +15,22 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * | Ctrl|  Gui|  Alt| MHen|    Space|    Space|  Hen|  Alt| Ctrl|  F_LAYER|LEFT|DOWN|RGHT|
    * `----------------------------------------------------------------------------------'
    */
-[QWERTY_LAYER] = KEYMAP(
-  KC_GRV,  KC_1,    KC_2,   KC_3,   KC_4,   KC_5,   KC_6,   KC_7,   KC_8,   KC_9,    KC_0,     KC_MINS,  KC_EQL,   KC_BSLS,  KC_DEL,          KC_MPLY, \
-  KC_TAB,  KC_Q,    KC_W,   KC_E,   KC_R,   KC_T,   KC_Y,   KC_U,   KC_I,   KC_O,    KC_P,     KC_LBRC,  KC_RBRC,  KC_BSPC,                   KC_MNXT, \
-  CTL_T(KC_ESC), KC_A,    KC_S,   KC_D,   KC_F,   KC_G,   KC_H,   KC_J,   KC_K,   KC_L,    KC_SCLN,  KC_QUOT,  XXXXXXX,  KC_ENT,                             \
-  KC_LSFT, XXXXXXX, KC_Z,   KC_X,   KC_C,   KC_V,   KC_B,   KC_N,   KC_M,   KC_COMM, KC_DOT,   KC_SLSH,   XXXXXXX, KC_RSFT,          KC_UP,            \
-  KC_CAPS, MO(F_LAYER), KC_LALT, KC_LGUI,   KC_SPC,   KC_SPC,  KC_RGUI,  KC_RALT,  MO(F_LAYER), TG(WINDOWS_LAYER),  KC_LEFT, KC_DOWN, KC_RGHT),
+  [_QWERTY] = KEYMAP(
+    KC_GRV,  KC_1,    KC_2,   KC_3,   KC_4,   KC_5,   KC_6,   KC_7,   KC_8,   KC_9,    KC_0,     KC_MINS,  KC_EQL,   KC_BSLS,  KC_DEL,          KC_VOLU, \
+    KC_TAB,  KC_Q,    KC_W,   KC_E,   KC_R,   KC_T,   KC_Y,   KC_U,   KC_I,   KC_O,    KC_P,     KC_LBRC,  KC_RBRC,  KC_BSPC,                   KC_VOLD, \
+    KC_CTL_ESC, KC_A,    KC_S,   KC_D,   KC_F,   KC_G,   KC_H,   KC_J,   KC_K,   KC_L,    KC_SCLN,  KC_QUOT,  XXXXXXX,  KC_ENT,                             \
+    KC_LSFT, XXXXXXX, KC_Z,   KC_X,   KC_C,   KC_V,   KC_B,   KC_N,   KC_M,   KC_COMM, KC_DOT,   KC_SLSH,   XXXXXXX, KC_RSFT,   KC_UP,            \
+    KC_CAPS, RAISE, KC_LALT, KC_LGUI,   KC_SPC,   KC_SPC,  KC_RGUI,  KC_RALT,  LOWER, DF(_WINDOWS),                    KC_LEFT, KC_DOWN, KC_RGHT
+  ),
 
 
-[WINDOWS_LAYER] = KEYMAP(
-  KC_ESC,  KC_1,    KC_2,   KC_3,   KC_4,   KC_5,   KC_6,   KC_7,   KC_8,   KC_9,    KC_0,     KC_MINS,  KC_EQL,   KC_BSLS,  KC_GRV,          KC_VOLU, \
-  KC_TAB,  KC_Q,    KC_W,   KC_E,   KC_R,   KC_T,   KC_Y,   KC_U,   KC_I,   KC_O,    KC_P,     KC_LBRC,  KC_RBRC,  KC_BSPC,                   KC_VOLD, \
-  KC_LCTL, KC_A,    KC_S,   KC_D,   KC_F,   KC_G,   KC_H,   KC_J,   KC_K,   KC_L,    KC_SCLN,  KC_QUOT,  XXXXXXX,  KC_ENT,                             \
-  KC_LSFT, XXXXXXX, KC_Z,   KC_X,   KC_C,   KC_V,   KC_B,   KC_N,   KC_M,   KC_COMM, KC_DOT,   KC_SLSH,   XXXXXXX, KC_RSFT,          KC_UP,            \
-  _______, MO(F_LAYER), KC_LGUI, KC_LALT,   KC_SPC,  LT(F_LAYER, KC_SPC),  KC_RGUI,  KC_RALT,  MO(F_LAYER), _______,  KC_LEFT, KC_DOWN, KC_RGHT),
+  [_WINDOWS] = KEYMAP(
+    KC_ESC,  KC_1,    KC_2,   KC_3,   KC_4,   KC_5,   KC_6,   KC_7,   KC_8,   KC_9,    KC_0,     KC_MINS,  KC_EQL,   KC_BSLS,  KC_GRV,          _______, \
+    KC_TAB,  KC_Q,    KC_W,   KC_E,   KC_R,   KC_T,   KC_Y,   KC_U,   KC_I,   KC_O,    KC_P,     KC_LBRC,  KC_RBRC,  KC_BSPC,                   _______, \
+    KC_LCTL, KC_A,    KC_S,   KC_D,   KC_F,   KC_G,   KC_H,   KC_J,   KC_K,   KC_L,    KC_SCLN,  KC_QUOT,  XXXXXXX,  KC_ENT,                             \
+    KC_LSFT, XXXXXXX, KC_Z,   KC_X,   KC_C,   KC_V,   KC_B,   KC_N,   KC_M,   KC_COMM, KC_DOT,   KC_SLSH,   XXXXXXX, KC_RSFT,   KC_UP,            \
+    _______, RAISE, KC_LGUI, KC_LALT,   KC_SPC,  LT(_RAISE, KC_SPC),  KC_RALT,  KC_RGUI,  LOWER, DF(_QWERTY),          KC_LEFT, KC_DOWN, KC_RGHT
+  ),
 
   /* Keymap F_LAYER: Function Layer
    * ,--------------------------------------------------------------------------.  ,----.
@@ -46,10 +45,27 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * |     |     |     |     |         |         |     |     |     |  F_LAYER|HOME|PGDN| END|
    * `----------------------------------------------------------------------------------'
    */
-[F_LAYER] = KEYMAP(
-  KC_GRV,  KC_F1,   KC_F2,  KC_F3,  KC_F4,  KC_F5,  KC_F6,  KC_F7,  KC_F8,  KC_F9,   KC_F10,   KC_F11,   KC_F12,   _______, _______,           KC_VOLU, \
-  _______, _______, _______,_______,RESET,_______,_______,_______,KC_PSCR,KC_SLCK, KC_PAUS,  _______,  _______,  _______,                   KC_VOLD, \
-  _______, _______, _______,_______,_______,_______,_______,_______,_______,_______, _______,  _______,  _______,  _______,                           \
-  _______, _______, _______,_______,_______,_______,_______,_______,_______,_______, _______,  _______,  _______,  _______,          KC_PGUP,         \
-  _______, _______, _______, _______,        _______,_______,                        _______,  _______,  _______,  MO(F_LAYER), KC_HOME, KC_PGDN, KC_END),
+  [_RAISE] = KEYMAP(
+    KC_GRV,  KC_F1,   KC_F2,  KC_F3,  KC_F4,  KC_F5,  KC_F6,  KC_F7,  KC_F8,  KC_F9,   KC_F10,   KC_F11,   KC_F12,   _______, _______,          KC_VOLU, \
+    _______, _______, _______,_______,_______,_______,_______,_______,KC_PSCR,KC_SLCK, KC_PAUS,  _______,  _______,  _______,                   KC_VOLD, \
+    _______, _______, _______,_______,_______,_______,_______,_______,_______,_______, _______,  _______,  _______,  _______,                           \
+    _______, _______, _______,_______,_______,_______,_______,_______,_______,_______, _______,  _______,  _______,  _______,          KC_PGUP,         \
+    _______, _______, _______, _______,        _______,_______,                        _______,  _______,  _______,  _______, KC_HOME, KC_PGDN, KC_END
+  ),
+
+  [_LOWER] = KEYMAP(
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,  _______,  _______, _______, _______,           _______, \
+    _______, _______, _______,_______,_______,_______,_______,_______,_______,_______, _______, _______,  _______,  _______,                             _______, \
+    _______, _______, _______,_______,_______,_______,_______,_______,_______,_______, _______,  _______,  _______,  _______,                           \
+    _______, _______, _______,_______,_______,_______,_______,_______,_______,_______, _______,  _______,  _______,  _______,          _______,         \
+    _______, _______, _______, _______,        _______,_______,                        _______,  _______,  _______,  _______, _______, _______, _______
+  ),
+
+  [_ADJUST] = KEYMAP(
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,  _______,  _______, _______, _______,           _______, \
+    RESET, _______, _______,_______,_______,_______,_______,_______,_______,_______, _______, _______,  _______,  _______,                             _______, \
+    _______, _______, _______,_______,_______,_______,_______,_______,_______,_______, _______,  _______,  _______,  _______,                           \
+    _______, _______, _______,_______,_______,_______,_______,_______,_______,_______, _______,  _______,  _______,  _______,          _______,         \
+    _______, _______, _______, _______,        _______,_______,                        _______,  _______,  _______,  _______, _______, _______, _______
+  ),
 };
