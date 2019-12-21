@@ -86,7 +86,7 @@ def main(argv):
     parser = argparse.ArgumentParser(description="Build util for QMK")
     parser.add_argument("keyboard", nargs=1)
     parser.add_argument("command", nargs=1, choices=["build", "flash"])
-    parser.add_argument("-p", "--programmer", nargs=1, default="flash", help="optional programmer")
+    parser.add_argument("-p", "--programmer", nargs=1, default=["flash"], help="optional programmer")
     args = parser.parse_args()
 
     keyboard = args.keyboard[0].strip("/")
