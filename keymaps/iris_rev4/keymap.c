@@ -1,20 +1,6 @@
 #include "nic.h"
 #include QMK_KEYBOARD_H
 
-enum custom_keymap_keycodes {
-  ENC_VOL = NEW_SAFE_RANGE,
-  ENC_MS_WH,
-  ENC_ARROWS_V,
-  ENC_ARROWS_H,
-  ENC_RGB_HUE,
-  ENC_RGB_MODE,
-  ENC_RGB_VAL,
-};
-
-uint16_t MIN_ENCODER_INDEX = ENC_VOL;
-uint16_t MAX_ENCODER_INDEX = ENC_RGB_VAL;
-uint16_t encoder_action = ENC_VOL;
-
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_QWERTY] = LAYOUT(
@@ -25,7 +11,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
      KC_CTL_ESC, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                               KC_H,    KC_J,    KC_K,    KC_L,  KC_SCLN, KC_QUOT,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_LSFT,   KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,  TG(_ADJUST),       KC_ENT,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_DEL,
+     KC_LSFT,   KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,   TG(_ADJUST),      KC_ENT,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_DEL,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
                                     KC_LGUI,  KC_LALT,  KC_BSPC,                  KC_ENT , KC_SPC , RAISE
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
@@ -74,8 +60,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   )
 };
 
-void handle_encoder_action(bool clockwise) {
-  switch (encoder_action) {
+void handle_encoder_mode(bool clockwise) {
+  switch (encoder_mode) {
     case ENC_VOL:
       if (clockwise) {
         tap_code(KC_VOLU);
@@ -130,9 +116,9 @@ void handle_encoder_action(bool clockwise) {
 
 bool process_record_keymap(uint16_t keycode, keyrecord_t *record) {
   if (keycode >= MIN_ENCODER_INDEX && keycode <= MAX_ENCODER_INDEX) {
-    encoder_action = keycode;
+    set_encoder_mode(keycode);
 
-    // Leave adjust layer on key up. Only for encoder actions.
+    // Exit adjust layer on key up, only for encoder actions.
     if (!record->event.pressed) {
       layer_off(_ADJUST);
     }
@@ -146,18 +132,13 @@ void encoder_update_user(uint8_t index, bool anticlockwise) {
   bool clockwise = !anticlockwise;
   uint8_t layer = biton32(layer_state);
 
-  // Allow encoder to be used to choose encoder action
+  // Allow encoder to be used to choose encoder mode
   if (layer == _ADJUST) {
-    if (!clockwise && encoder_action > MIN_ENCODER_INDEX) {
-      encoder_action--;
-    }
-    else if (clockwise && encoder_action < MAX_ENCODER_INDEX) {
-      encoder_action++;
-    }
+    cycle_encoder_mode(clockwise);
     return;
   }
 
-  // Alternate encoder action (like shift encoder)
+  // Alternate encoder mode (like shift encoder)
   if (layer == _RAISE) {
     if (clockwise) {
       tap_code(KC_MS_WH_DOWN);
@@ -167,5 +148,5 @@ void encoder_update_user(uint8_t index, bool anticlockwise) {
     return;
   }
 
-  return handle_encoder_action(clockwise);
+  return handle_encoder_mode(clockwise);
 }

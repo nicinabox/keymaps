@@ -9,7 +9,7 @@ enum custom_keycodes {
   RAISE,
   ADJUST,
   BSPCDEL,
-  NEW_SAFE_RANGE,
+  _SAFE_RANGE,
 };
 
 enum userspace_layers {
@@ -19,9 +19,28 @@ enum userspace_layers {
     _RAISE,
     _NORMAN,
     _GAMEPAD,
+    _NUMPAD,
     _F_KEYS,
     _ADJUST,
 };
+
+enum encoder_modes {
+  ENC_VOL = _SAFE_RANGE,
+  ENC_MS_WH,
+  ENC_ARROWS_V,
+  ENC_ARROWS_H,
+  ENC_RGB_HUE,
+  ENC_RGB_MODE,
+  ENC_RGB_VAL,
+  _MAX_ENCODER_MODES,
+};
+
+uint16_t MIN_ENCODER_INDEX;
+uint16_t MAX_ENCODER_INDEX;
+volatile uint16_t encoder_mode;
+
+void set_encoder_mode(uint16_t);
+void cycle_encoder_mode(bool);
 
 #define KC_BSDEL BSPCDEL
 #define KC_LOWERTAB LT(_LOWER, KC_TAB)

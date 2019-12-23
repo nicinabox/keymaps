@@ -1,4 +1,31 @@
 #include "nic.h"
+#include "encoder.h"
+
+uint16_t MIN_ENCODER_INDEX = ENC_VOL;
+uint16_t MAX_ENCODER_INDEX = _MAX_ENCODER_MODES - 1;
+volatile uint16_t encoder_mode = ENC_VOL;
+
+__attribute__ ((weak))
+void handle_encoder_mode(bool clockwise) {
+}
+
+
+void set_encoder_mode(uint16_t next_mode) {
+  if (encoder_mode > MAX_ENCODER_INDEX || encoder_mode < MIN_ENCODER_INDEX) {
+    return;
+  }
+
+  encoder_mode = next_mode;
+}
+
+
+void cycle_encoder_mode(bool clockwise) {
+  if (clockwise) {
+    set_encoder_mode(encoder_mode + 1);
+  } else {
+    set_encoder_mode(encoder_mode - 1);
+  }
+}
 
 
 __attribute__ ((weak))
