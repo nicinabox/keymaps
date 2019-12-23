@@ -1,5 +1,4 @@
 #include "nic.h"
-#include "encoder.h"
 
 uint16_t MIN_ENCODER_INDEX = ENC_VOL;
 uint16_t MAX_ENCODER_INDEX = _MAX_ENCODER_MODES - 1;
@@ -11,7 +10,7 @@ void handle_encoder_mode(bool clockwise) {
 
 
 void set_encoder_mode(uint16_t next_mode) {
-  if (encoder_mode > MAX_ENCODER_INDEX || encoder_mode < MIN_ENCODER_INDEX) {
+  if (next_mode > MAX_ENCODER_INDEX || next_mode < MIN_ENCODER_INDEX) {
     return;
   }
 
@@ -76,5 +75,40 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       break;
   }
 
+  if (keycode >= MIN_ENCODER_INDEX && keycode <= MAX_ENCODER_INDEX) {
+    set_encoder_mode(keycode);
+
+    // Exit adjust layer on key up, only for encoder actions.
+    if (!record->event.pressed) {
+      layer_off(_ADJUST);
+    }
+  }
+
   return process_record_keymap(keycode, record);
+}
+
+
+__attribute__ ((weak))
+void encoder_update_user(uint8_t index, bool anticlockwise) {
+  // TODO: clockwise direction is backwards. Update when fixed.
+  bool clockwise = !anticlockwise;
+  uint8_t layer = biton32(layer_state);
+
+  // Allow encoder to be used to choose encoder mode
+  if (layer == _ADJUST) {
+    cycle_encoder_mode(clockwise);
+    return;
+  }
+
+  // Alternate encoder mode (like shift encoder)
+  if (layer == _RAISE) {
+    if (clockwise) {
+      tap_code(KC_MS_WH_DOWN);
+    } else {
+      tap_code(KC_MS_WH_UP);
+    }
+    return;
+  }
+
+  return handle_encoder_mode(clockwise);
 }
