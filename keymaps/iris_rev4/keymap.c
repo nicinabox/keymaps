@@ -2,24 +2,18 @@
 #include QMK_KEYBOARD_H
 
 enum custom_keymap_keycodes {
-  KC_ENC_VOL = NEW_SAFE_RANGE,
-  KC_ENC_MS_WHEEL,
-  KC_ENC_ARROWS_V,
-  KC_ENC_ARROWS_H,
-  KC_ENC_RGB_HUE,
-};
-
-enum encoder_actions {
-  ENC_VOL,
-  ENC_MS_WHEEL,
+  ENC_VOL = NEW_SAFE_RANGE,
+  ENC_MS_WH,
   ENC_ARROWS_V,
   ENC_ARROWS_H,
   ENC_RGB_HUE,
+  ENC_RGB_MODE,
+  ENC_RGB_VAL,
 };
 
-uint8_t MIN_ENCODER_INDEX = ENC_VOL;
-uint8_t MAX_ENCODER_INDEX = ENC_RGB_HUE;
-uint8_t encoder_action = ENC_VOL;
+uint16_t MIN_ENCODER_INDEX = ENC_VOL;
+uint16_t MAX_ENCODER_INDEX = ENC_RGB_VAL;
+uint16_t encoder_action = ENC_VOL;
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -31,7 +25,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
      KC_CTL_ESC, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                               KC_H,    KC_J,    KC_K,    KC_L,  KC_SCLN, KC_QUOT,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_LSFT,   KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_MUTE,           KC_ENT,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_DEL,
+     KC_LSFT,   KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,  TG(_ADJUST),       KC_ENT,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_DEL,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
                                     KC_LGUI,  KC_LALT,  KC_BSPC,                  KC_ENT , KC_SPC , RAISE
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
@@ -67,7 +61,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_ADJUST] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
-     _______, KC_ENC_VOL, KC_ENC_MS_WHEEL, KC_ENC_ARROWS_V, KC_ENC_ARROWS_H, KC_ENC_RGB_HUE,    _______, _______, _______, _______, _______, _______,
+     _______, ENC_VOL, ENC_MS_WH, ENC_ARROWS_V, ENC_ARROWS_H, ENC_RGB_HUE,            ENC_RGB_MODE, ENC_RGB_VAL, _______, _______, _______, _______,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
      RESET,   _______, _______, _______, _______, _______,                            _______, _______, _______, _______, _______, _______,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
@@ -89,7 +83,7 @@ void do_encoder_action(bool clockwise) {
         tap_code(KC_VOLD);
       }
       break;
-    case ENC_MS_WHEEL:
+    case ENC_MS_WH:
       if (clockwise) {
         tap_code(KC_MS_WH_DOWN);
       } else {
@@ -117,26 +111,30 @@ void do_encoder_action(bool clockwise) {
         rgblight_decrease_hue();
       }
       break;
+    case ENC_RGB_MODE:
+      if (clockwise) {
+        rgblight_step();
+      } else {
+        rgblight_step_reverse();
+      }
+      break;
+    case ENC_RGB_VAL:
+      if (clockwise) {
+        rgblight_increase_val();
+      } else {
+        rgblight_decrease_val();
+      }
+      break;
   }
 }
 
 bool process_record_keymap(uint16_t keycode, keyrecord_t *record) {
-  switch (keycode) {
-    case KC_ENC_VOL:
-      encoder_action = ENC_VOL;
-      break;
-    case KC_ENC_MS_WHEEL:
-      encoder_action = ENC_MS_WHEEL;
-      break;
-    case KC_ENC_ARROWS_V:
-      encoder_action = ENC_ARROWS_V;
-      break;
-    case KC_ENC_ARROWS_H:
-      encoder_action = ENC_ARROWS_H;
-      break;
-    case KC_ENC_RGB_HUE:
-      encoder_action = ENC_RGB_HUE;
-      break;
+  if (keycode >= MIN_ENCODER_INDEX && keycode <= MAX_ENCODER_INDEX) {
+    encoder_action = keycode;
+
+    if (!record->event.pressed) {
+      layer_off(_ADJUST);
+    }
   }
 
   return true;
