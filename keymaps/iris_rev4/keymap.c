@@ -63,7 +63,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
      _______, ENC_VOL, ENC_MS_WH, ENC_ARROWS_V, ENC_ARROWS_H, ENC_RGB_HUE,            ENC_RGB_MODE, ENC_RGB_VAL, _______, _______, _______, _______,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     RESET,   _______, _______, _______, _______, _______,                            _______, _______, _______, _______, _______, _______,
+     RESET,   _______, _______, _______, _______, _______,                            RGB_M_B, RGB_M_R, RGB_M_SW, RGB_M_SN, RGB_M_K, RGB_M_X,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
      _______, _______, _______, _______, _______, _______,                            _______, RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI, _______,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
@@ -74,7 +74,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   )
 };
 
-void do_encoder_action(bool clockwise) {
+void handle_encoder_action(bool clockwise) {
   switch (encoder_action) {
     case ENC_VOL:
       if (clockwise) {
@@ -132,6 +132,7 @@ bool process_record_keymap(uint16_t keycode, keyrecord_t *record) {
   if (keycode >= MIN_ENCODER_INDEX && keycode <= MAX_ENCODER_INDEX) {
     encoder_action = keycode;
 
+    // Leave adjust layer on key up. Only for encoder actions.
     if (!record->event.pressed) {
       layer_off(_ADJUST);
     }
@@ -141,18 +142,30 @@ bool process_record_keymap(uint16_t keycode, keyrecord_t *record) {
 }
 
 void encoder_update_user(uint8_t index, bool anticlockwise) {
+  // TODO: clockwise direction is backwards. Update when fixed.
   bool clockwise = !anticlockwise;
+  uint8_t layer = biton32(layer_state);
 
-  if (biton32(layer_state) == _ADJUST) {
+  // Allow encoder to be used to choose encoder action
+  if (layer == _ADJUST) {
     if (!clockwise && encoder_action > MIN_ENCODER_INDEX) {
       encoder_action--;
     }
     else if (clockwise && encoder_action < MAX_ENCODER_INDEX) {
       encoder_action++;
     }
-
     return;
   }
 
-  return do_encoder_action(clockwise);
+  // Alternate encoder action (like shift encoder)
+  if (layer == _RAISE) {
+    if (clockwise) {
+      tap_code(KC_MS_WH_DOWN);
+    } else {
+      tap_code(KC_MS_WH_UP);
+    }
+    return;
+  }
+
+  return handle_encoder_action(clockwise);
 }
