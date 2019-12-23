@@ -1,6 +1,26 @@
 #include "nic.h"
 #include QMK_KEYBOARD_H
 
+enum custom_keymap_keycodes {
+  KC_ENC_VOL = NEW_SAFE_RANGE,
+  KC_ENC_MS_WHEEL,
+  KC_ENC_ARROWS_V,
+  KC_ENC_ARROWS_H,
+  KC_ENC_RGB_HUE,
+};
+
+enum encoder_actions {
+  ENC_VOL,
+  ENC_MS_WHEEL,
+  ENC_ARROWS_V,
+  ENC_ARROWS_H,
+  ENC_RGB_HUE,
+};
+
+uint8_t MIN_ENCODER_INDEX = ENC_VOL;
+uint8_t MAX_ENCODER_INDEX = ENC_RGB_HUE;
+uint8_t encoder_action = ENC_VOL;
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_QWERTY] = LAYOUT(
@@ -47,9 +67,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_ADJUST] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
-     _______, _______, _______, _______, _______, _______,                            _______, _______, _______, _______, _______, _______,
+     _______, KC_ENC_VOL, KC_ENC_MS_WHEEL, KC_ENC_ARROWS_V, KC_ENC_ARROWS_H, KC_ENC_RGB_HUE,    _______, _______, _______, _______, _______, _______,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     RESET, _______, _______, _______, _______, _______,                            _______, _______, _______, _______, _______, _______,
+     RESET,   _______, _______, _______, _______, _______,                            _______, _______, _______, _______, _______, _______,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
      _______, _______, _______, _______, _______, _______,                            _______, RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI, _______,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
@@ -60,43 +80,81 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   )
 };
 
-void encoder_update_user(uint8_t index, bool anticlockwise) {
-  switch (biton32(layer_state)) {
-    case _QWERTY:
-      if (anticlockwise) {
-        register_code(KC_LSFT);
-        register_code(KC_LALT);
-        tap_code16(LSFT(LALT(KC_VOLD)));
-        unregister_code(KC_LSFT);
-        unregister_code(KC_LALT);
+void do_encoder_action(bool clockwise) {
+  switch (encoder_action) {
+    case ENC_VOL:
+      if (clockwise) {
+        tap_code(KC_VOLU);
       } else {
-        register_code(KC_LSFT);
-        register_code(KC_LALT);
-        tap_code16(LSFT(LALT(KC_VOLU)));
-        unregister_code(KC_LSFT);
-        unregister_code(KC_LALT);
+        tap_code(KC_VOLD);
       }
       break;
-    case _LOWER:
-      if (anticlockwise) {
-        tap_code(KC_MS_WH_UP);
-      } else {
+    case ENC_MS_WHEEL:
+      if (clockwise) {
         tap_code(KC_MS_WH_DOWN);
+      } else {
+        tap_code(KC_MS_WH_UP);
       }
       break;
-    case _RAISE:
-      if (anticlockwise) {
+    case ENC_ARROWS_V:
+      if (clockwise) {
         tap_code(KC_DOWN);
       } else {
         tap_code(KC_UP);
       }
       break;
-    case _ADJUST:
-      if (anticlockwise) {
-        rgblight_decrease_hue();
+    case ENC_ARROWS_H:
+      if (clockwise) {
+        tap_code(KC_RIGHT);
       } else {
+        tap_code(KC_LEFT);
+      }
+      break;
+    case ENC_RGB_HUE:
+      if (clockwise) {
         rgblight_increase_hue();
+      } else {
+        rgblight_decrease_hue();
       }
       break;
   }
+}
+
+bool process_record_keymap(uint16_t keycode, keyrecord_t *record) {
+  switch (keycode) {
+    case KC_ENC_VOL:
+      encoder_action = ENC_VOL;
+      break;
+    case KC_ENC_MS_WHEEL:
+      encoder_action = ENC_MS_WHEEL;
+      break;
+    case KC_ENC_ARROWS_V:
+      encoder_action = ENC_ARROWS_V;
+      break;
+    case KC_ENC_ARROWS_H:
+      encoder_action = ENC_ARROWS_H;
+      break;
+    case KC_ENC_RGB_HUE:
+      encoder_action = ENC_RGB_HUE;
+      break;
+  }
+
+  return true;
+}
+
+void encoder_update_user(uint8_t index, bool anticlockwise) {
+  bool clockwise = !anticlockwise;
+
+  if (biton32(layer_state) == _ADJUST) {
+    if (!clockwise && encoder_action > MIN_ENCODER_INDEX) {
+      encoder_action--;
+    }
+    else if (clockwise && encoder_action < MAX_ENCODER_INDEX) {
+      encoder_action++;
+    }
+
+    return;
+  }
+
+  return do_encoder_action(clockwise);
 }
