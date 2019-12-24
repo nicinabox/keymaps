@@ -8,8 +8,15 @@ enum custom_keycodes {
   LOWER,
   RAISE,
   ADJUST,
-  BSPCDEL,
-  _SAFE_RANGE,
+  ENC_VOL,
+  ENC_MS_WH,
+  ENC_ARROWS_V,
+  ENC_ARROWS_H,
+  ENC_RGB_HUE,
+  ENC_RGB_MODE,
+  ENC_RGB_VAL,
+  _MAX_ENCODER_MODES,
+  USER_SAFE_RANGE,
 };
 
 enum userspace_layers {
@@ -22,17 +29,7 @@ enum userspace_layers {
   _NUMPAD,
   _F_KEYS,
   _ADJUST,
-};
-
-enum encoder_modes {
-  ENC_VOL = _SAFE_RANGE,
-  ENC_MS_WH,
-  ENC_ARROWS_V,
-  ENC_ARROWS_H,
-  ENC_RGB_HUE,
-  ENC_RGB_MODE,
-  ENC_RGB_VAL,
-  _MAX_ENCODER_MODES,
+  USER_SAFE_LAYER,
 };
 
 uint16_t MIN_ENCODER_INDEX;
