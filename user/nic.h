@@ -13,15 +13,15 @@ enum custom_keycodes {
 };
 
 enum userspace_layers {
-    _QWERTY = 0,
-    _WINDOWS,
-    _LOWER,
-    _RAISE,
-    _NORMAN,
-    _GAMEPAD,
-    _NUMPAD,
-    _F_KEYS,
-    _ADJUST,
+  _QWERTY = 0,
+  _WINDOWS,
+  _LOWER,
+  _RAISE,
+  _NORMAN,
+  _GAMEPAD,
+  _NUMPAD,
+  _F_KEYS,
+  _ADJUST,
 };
 
 enum encoder_modes {
