@@ -108,21 +108,11 @@ __attribute__ ((weak))
 void encoder_update_user(uint8_t index, bool anticlockwise) {
   // TODO: clockwise direction is backwards. Update when fixed.
   bool clockwise = !anticlockwise;
-  uint8_t layer = biton32(layer_state);
+  layer_state_t layer = biton32(layer_state);
 
   // Allow encoder to be used to choose encoder mode
   if (layer == _ADJUST) {
     cycle_encoder_mode(clockwise);
-    return;
-  }
-
-  // Alternate encoder mode (like shift encoder)
-  if (layer == _RAISE) {
-    if (clockwise) {
-      tap_code(KC_MS_WH_DOWN);
-    } else {
-      tap_code(KC_MS_WH_UP);
-    }
     return;
   }
 

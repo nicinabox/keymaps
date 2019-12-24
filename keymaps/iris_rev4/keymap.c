@@ -61,6 +61,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 void handle_encoder_mode(bool clockwise) {
+  layer_state_t layer = biton32(layer_state);
+
+  // Alternate encoder mode (like shift encoder)
+  if (layer == _RAISE) {
+    if (clockwise) {
+      tap_code(KC_VOLU);
+    } else {
+      tap_code(KC_VOLD);
+    }
+    return;
+  }
+
   switch (encoder_mode) {
     case ENC_VOL:
       if (clockwise) {
