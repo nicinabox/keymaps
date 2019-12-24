@@ -34,6 +34,10 @@ bool process_record_keymap(uint16_t keycode, keyrecord_t *record) {
 
 __attribute__ ((weak))
 layer_state_t layer_state_set_user(layer_state_t state) {
+  if (get_highest_layer(state) == _ADJUST) {
+    return state;
+  }
+
   return update_tri_layer_state(state, _LOWER, _RAISE, _ADJUST);
 }
 

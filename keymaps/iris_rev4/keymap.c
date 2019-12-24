@@ -113,8 +113,3 @@ void handle_encoder_mode(bool clockwise) {
       break;
   }
 }
-
-// Noop override to allow toggle to adjust
-layer_state_t layer_state_set_user(uint32_t state) {
-  return state;
-}
