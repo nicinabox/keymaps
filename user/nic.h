@@ -46,6 +46,8 @@ void cycle_encoder_mode(bool);
 #define ALT_DEL LALT_T(KC_DEL)
 
 #define TMUX LCTL(KC_B)
+#define LOCK LGUI(LCTL(KC_Q))
+
 #define CTL_ESC CTL_T(KC_ESC)
 #define GUI_CAPS RGUI_T(KC_CAPS)
 #define RSFT_SLSH RSFT_T(KC_SLSH)
