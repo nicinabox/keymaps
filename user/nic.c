@@ -31,6 +31,7 @@ bool process_record_keymap(uint16_t keycode, keyrecord_t *record) {
   return true;
 }
 
+
 __attribute__ ((weak))
 uint32_t layer_state_set_user(uint32_t state) {
   return update_tri_layer_state(state, _LOWER, _RAISE, _ADJUST);
@@ -43,6 +44,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case QWERTY:
       if (record->event.pressed) {
         set_single_persistent_default_layer(_QWERTY);
+      }
+      return false;
+      break;
+
+    case WINDOWS:
+      if (record->event.pressed) {
+        set_single_persistent_default_layer(_WINDOWS);
       }
       return false;
       break;

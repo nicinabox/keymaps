@@ -5,6 +5,7 @@
 
 enum custom_keycodes {
   QWERTY = SAFE_RANGE,
+  WINDOWS,
   LOWER,
   RAISE,
   ADJUST,
