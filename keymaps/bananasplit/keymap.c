@@ -1,5 +1,4 @@
 #include "nic.h"
-#include QMK_KEYBOARD_H
 
 enum keymap_keycodes {
   _WINDOWS_RAISE = USER_SAFE_LAYER

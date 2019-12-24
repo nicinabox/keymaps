@@ -1,8 +1,6 @@
 #include "nic.h"
 #include "layout.h"
 
-#include QMK_KEYBOARD_H
-
 #define SPACEFN LT(_RAISE, KC_SPC)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
