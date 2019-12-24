@@ -32,9 +32,9 @@ enum userspace_layers {
   USER_SAFE_LAYER,
 };
 
-uint16_t MIN_ENCODER_INDEX;
-uint16_t MAX_ENCODER_INDEX;
-volatile uint16_t encoder_mode;
+extern uint16_t MIN_ENCODER_INDEX;
+extern uint16_t MAX_ENCODER_INDEX;
+extern volatile uint16_t encoder_mode;
 
 void set_encoder_mode(uint16_t);
 void cycle_encoder_mode(bool);
