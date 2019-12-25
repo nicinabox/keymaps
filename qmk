@@ -20,6 +20,7 @@ keyboard_path_map = {
     "nh60": "handwired/nh60",
     "minivan": "thevankeyboards/minivan",
     "planck": "planck/rev2",
+    "satan": "gh60/satan",
 }
 
 

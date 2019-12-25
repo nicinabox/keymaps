@@ -1,1 +1,1 @@
-# Satan GH60 layout - Nic
+# GH60 Satan
