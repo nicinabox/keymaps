@@ -1,19 +1,23 @@
 # keymaps
 
-My QMK keymaps and utils
+My keyboards, keymaps, and utils for qmk_firmware
 
-## Quick start
+## Usage
 
     ./qmk KEYBOARD build
     ./qmk KEYBOARD flash
 
-## Development
+## CLI Development
 
-`./qmk` contains directory mappings of top level keymaps to the qmk keyboard/keymap.
+`keymaps` and `keyboards` contain directory mappings to the qmk keyboard and keymap.
 
 ### Submodules
 
     git submodule update --init --recursive
+
+## Resources
+
+- [qmk_firmware](https://github.com/qmk/qmk_firmware)
 
 ## License
 
