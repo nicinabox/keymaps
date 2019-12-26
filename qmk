@@ -76,9 +76,9 @@ def build(keyboard, user, programmer, flash=False):
 
 
 def flash(keyboard, user, programmer):
-    print("Put your {} into bootlader mode".format(keyboard), end="")
+    print('Put your {} into bootlader mode'.format(keyboard), end='')
     for _ in range(0, 3):
-        print(".", end="")
+        print('.', end='')
         sys.stdout.flush()
         time.sleep(1)
     print()
@@ -91,28 +91,27 @@ def main(argv):
     user = getpass.getuser()
 
     parser = argparse.ArgumentParser(description='Build util for QMK')
-    parser.add_argument('keyboard', nargs=1)
-    parser.add_argument('command', nargs=1, choices=['build', 'flash'])
-    parser.add_argument('-p', '--programmer', nargs=1, default=['flash'], help='programmer')
-    parser.add_argument('-u', '--user', nargs=1, default=[user], help='user')
-    parser.add_argument('-f', '--flash', action='store_true', help='build and flash')
+    parser.add_argument('keyboard')
+    parser.add_argument('command', choices=['build', 'flash'])
+    parser.add_argument('-p', '--programmer', default='flash', help='eg, flash, dfu, avrdude, teensy')
+    parser.add_argument('-u', '--user', default=user, help='user (default: {})'.format(user))
+    parser.add_argument('-f', '--flash', action='store_true', help='continue to flash after build')
     args = parser.parse_args()
 
-    keyboard = args.keyboard[0].strip("/")
-    if not os.path.isdir(abs_path("keymaps", keyboard)):
-        print("Invalid keyboard: {}".format(keyboard))
+    keyboard = args.keyboard.strip('/')
+    if not os.path.isdir(abs_path('keymaps', keyboard)):
+        print('Invalid keyboard: {}'.format(keyboard))
         return 1
 
     try:
-        command = args.command[0]
-        if command == "build":
-            build(keyboard, args.user[0], args.programmer[0], args.flash)
-        elif command == "flash":
-            flash(keyboard, args.user[0], args.programmer[0])
+        if args.command == 'build':
+            build(keyboard, args.user, args.programmer, args.flash)
+        elif args.command == 'flash':
+            flash(keyboard, args.user, args.programmer)
     except KeyboardInterrupt:
         print()
-        print("Aborting.")
+        print('Aborting.')
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     sys.exit(main(sys.argv))
