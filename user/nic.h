@@ -39,8 +39,11 @@ extern volatile uint16_t encoder_mode;
 void set_encoder_mode(uint16_t);
 void cycle_encoder_mode(bool);
 
-#define LOWER_TAB   LT(_LOWER, KC_TAB)
+#define LO_TAB      LT(_LOWER, KC_TAB)
 #define HYPER_TAB   ALL_T(KC_TAB)
+
+#define LO_Z        LT(_LOWER, KC_Z)
+#define LO_SLSH     LT(_LOWER, KC_SLSH)
 
 #define ALT_TAB     LALT_T(KC_TAB)
 #define ALT_DEL     LALT_T(KC_DEL)
