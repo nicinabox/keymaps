@@ -46,7 +46,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_ADJUST] = LAYOUT(
     //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
-       _______, ENC_VOL, ENC_MS_WH, ENC_ARROWS_V, ENC_ARROWS_H, ENC_RGB_HUE,            ENC_RGB_MODE, ENC_RGB_VAL, _______, _______, _______, _______,
+       _______, ENC_VOL, ENC_MS_WH, ENC_ARROWS_V, ENC_ARROWS_H, ENC_UNDO,               ENC_RGB_MODE, ENC_RGB_HUE, ENC_RGB_VAL, _______, _______, _______,
     //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
        RESET,   _______, _______, _______, _______, _______,                            _______, RGB_M_P, RGB_M_R, RGB_M_SW, RGB_M_X, _______,
     //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
@@ -99,6 +99,13 @@ void handle_encoder_mode(bool clockwise) {
         tap_code(KC_RIGHT);
       } else {
         tap_code(KC_LEFT);
+      }
+      break;
+    case ENC_UNDO:
+      if (clockwise) {
+        tap_code16(G(KC_Y));
+      } else {
+        tap_code16(G(KC_Z));
       }
       break;
     case ENC_RGB_HUE:

@@ -3,7 +3,8 @@
 
 #include "quantum.h"
 
-enum userspace_keycodes {
+enum userspace_keycodes
+{
   QWERTY = SAFE_RANGE,
   WINDOWS,
   LOWER,
@@ -16,11 +17,13 @@ enum userspace_keycodes {
   ENC_RGB_HUE,
   ENC_RGB_MODE,
   ENC_RGB_VAL,
-  _MAX_ENCODER_MODES,
+  ENC_UNDO,
+      _MAX_ENCODER_MODES,
   USER_SAFE_RANGE,
 };
 
-enum userspace_layers {
+enum userspace_layers
+{
   _QWERTY = 0,
   _WINDOWS,
   _GAMEPAD,
