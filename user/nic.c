@@ -34,11 +34,11 @@ bool process_record_keymap(uint16_t keycode, keyrecord_t *record) {
 
 __attribute__ ((weak))
 layer_state_t layer_state_set_user(layer_state_t state) {
-  if (get_highest_layer(state) == _ADJUST) {
+  if (get_highest_layer(state) == ADJUST_LAYER) {
     return state;
   }
 
-  return update_tri_layer_state(state, _LOWER, _RAISE, _ADJUST);
+  return update_tri_layer_state(state, LOWER_LAYER, RAISE_LAYER, ADJUST_LAYER);
 }
 
 
@@ -47,45 +47,45 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     case QWERTY:
       if (record->event.pressed) {
-        set_single_persistent_default_layer(_QWERTY);
+        set_single_persistent_default_layer(QWERTY_LAYER);
       }
       return false;
       break;
 
     case WINDOWS:
       if (record->event.pressed) {
-        set_single_persistent_default_layer(_WINDOWS);
+        set_single_persistent_default_layer(WINDOWS_LAYER);
       }
       return false;
       break;
 
     case LOWER:
       if (record->event.pressed) {
-        layer_on(_LOWER);
-        update_tri_layer(_LOWER, _RAISE, _ADJUST);
+        layer_on(LOWER_LAYER);
+        update_tri_layer(LOWER_LAYER, RAISE_LAYER, ADJUST_LAYER);
       } else {
-        layer_off(_LOWER);
-        update_tri_layer(_LOWER, _RAISE, _ADJUST);
+        layer_off(LOWER_LAYER);
+        update_tri_layer(LOWER_LAYER, RAISE_LAYER, ADJUST_LAYER);
       }
       return false;
       break;
 
     case RAISE:
       if (record->event.pressed) {
-        layer_on(_RAISE);
-        update_tri_layer(_LOWER, _RAISE, _ADJUST);
+        layer_on(RAISE_LAYER);
+        update_tri_layer(LOWER_LAYER, RAISE_LAYER, ADJUST_LAYER);
       } else {
-        layer_off(_RAISE);
-        update_tri_layer(_LOWER, _RAISE, _ADJUST);
+        layer_off(RAISE_LAYER);
+        update_tri_layer(LOWER_LAYER, RAISE_LAYER, ADJUST_LAYER);
       }
       return false;
       break;
 
     case ADJUST:
       if (record->event.pressed) {
-        layer_on(_ADJUST);
+        layer_on(ADJUST_LAYER);
       } else {
-        layer_off(_ADJUST);
+        layer_off(ADJUST_LAYER);
       }
       return false;
       break;
@@ -96,7 +96,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
     // Exit adjust layer on key up, only for encoder actions.
     if (!record->event.pressed) {
-      layer_off(_ADJUST);
+      layer_off(ADJUST_LAYER);
     }
   }
 
@@ -111,7 +111,7 @@ void encoder_update_user(uint8_t index, bool anticlockwise) {
   layer_state_t layer = biton32(layer_state);
 
   // Allow encoder to be used to choose encoder mode
-  if (layer == _ADJUST) {
+  if (layer == ADJUST_LAYER) {
     cycle_encoder_mode(clockwise);
     return;
   }

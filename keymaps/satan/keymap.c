@@ -14,7 +14,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * |Ctrl|Alt |Gui |      Space            |Gui |Alt |FN  |Ctrl |
    * `-----------------------------------------------------------'
    */
-[_QWERTY] = LAYOUT_60_ansi(
+[QWERTY_LAYER] = LAYOUT_60_ansi(
   KC_GESC, KC_1,   KC_2,   KC_3,   KC_4,   KC_5,   KC_6,   KC_7,   KC_8,   KC_9,   KC_0,   KC_MINS, KC_EQL, KC_BSPC,
   KC_TAB,  KC_Q,   KC_W,   KC_E,   KC_R,   KC_T,   KC_Y,   KC_U,   KC_I,   KC_O,   KC_P,   KC_LBRC, KC_RBRC,KC_BSLS,
   KC_LCTL, KC_A,   KC_S,   KC_D,   KC_F,   KC_G,   KC_H,   KC_J,   KC_K,   KC_L,   KC_SCLN,KC_QUOT,         KC_ENTER,
@@ -22,7 +22,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   LOWER,  KC_LGUI, KC_RGUI,                KC_SPC,                                 RAISE,  KC_RGUI, KC_RALT, KC_RCTL
 ),
 
-[_RAISE] = LAYOUT_60_ansi(
+[RAISE_LAYER] = LAYOUT_60_ansi(
   _______, _______, _______, _______, _______, _______, _______, KC_MPRV, KC_MPLY, KC_MNXT, KC_MUTE, KC_VOLD, KC_VOLU, KC_DEL,
   _______, _______, _______, _______, _______, _______, _______,  _______,  _______,   _______,   KC_UP,   _______, _______,_______,
   _______, _______, _______, _______,   _______,   _______,   _______,   _______,   KC_PGUP,   KC_LEFT,   KC_DOWN,   KC_RIGHT,  _______,
@@ -30,7 +30,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   _______, _______, _______,                _______,                                 _______, _______, _______,_______
 ),
 
-[_ADJUST] = LAYOUT_60_ansi(
+[ADJUST_LAYER] = LAYOUT_60_ansi(
   _______, _______,_______,_______,_______,_______,_______,_______,_______,_______,_______,_______,_______,_______,
   RESET,  RGB_TOG,RGB_HUI,RGB_SAI,RGB_VAI,_______,_______,_______,_______,_______,_______, _______,_______, _______,
   _______,RGB_MOD,RGB_HUD,RGB_SAD,RGB_VAD,_______,_______,_______,_______,_______,_______,_______,        _______,

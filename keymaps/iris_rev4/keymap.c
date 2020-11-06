@@ -3,7 +3,7 @@
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
-  [_QWERTY] = LAYOUT(
+  [QWERTY_LAYER] = LAYOUT(
     //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
        KC_GRV,   KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                               KC_6,    KC_7,    KC_8,    KC_9,    KC_0,   KC_MINS,
     //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
@@ -17,7 +17,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                   // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   ),
 
-  [_LOWER] = LAYOUT(
+  [LOWER_LAYER] = LAYOUT(
     //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
        _______, _______, _______, SCR, SCR_SEL, SCR_SEL_CP,                             _______, KC_7,    KC_8,    KC_9,    KC_ASTR , KC_MINS,
     //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
@@ -31,7 +31,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                   // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   ),
 
-  [_RAISE] = LAYOUT(
+  [RAISE_LAYER] = LAYOUT(
     //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
        KC_EQL,  _______, _______, SCR, SCR_SEL, SCR_SEL_CP,                             KC_MPRV, KC_MPLY, KC_MNXT, KC_VOLD, KC_VOLU , KC_PLUS,
     //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
@@ -45,7 +45,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                   // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   ),
 
-  [_ADJUST] = LAYOUT(
+  [ADJUST_LAYER] = LAYOUT(
     //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
        _______, ENC_VOL, ENC_MS_WH, ENC_ARROWS_V, ENC_ARROWS_H, ENC_UNDO,               ENC_RGB_MODE, ENC_RGB_HUE, ENC_RGB_VAL, _______, _______, _______,
     //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
@@ -65,11 +65,11 @@ void handle_encoder_mode(bool clockwise) {
   volatile uint16_t next_encoder_mode = encoder_mode;
 
   // Alternate encoder mode (like shift encoder)
-  if (layer == _RAISE) {
+  if (layer == RAISE_LAYER) {
     next_encoder_mode = ENC_ARROWS_V;
   }
 
-  if (layer == _LOWER) {
+  if (layer == LOWER_LAYER) {
     next_encoder_mode = ENC_MS_WH;
   }
 

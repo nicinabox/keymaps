@@ -1,11 +1,11 @@
 #include "nic.h"
 
 enum keymap_keycodes {
-  _WINDOWS_RAISE = USER_SAFE_LAYER
+  WINDOWS_RAISE = USER_SAFE_LAYER
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-  [_QWERTY] = LAYOUT_hhkb_arrow(
+  [QWERTY_LAYER] = LAYOUT_hhkb_arrow(
     KC_GRV,    KC_1,   KC_2,   KC_3,   KC_4,   KC_5,   KC_6,   KC_7,   KC_8,   KC_9,   KC_0,   KC_MINS, KC_EQL, KC_BSLS, KC_DEL,
     KC_TAB,    KC_Q,   KC_W,   KC_E,   KC_R,   KC_T,   KC_Y,   KC_U,   KC_I,   KC_O,   KC_P,     KC_LBRC, KC_RBRC,       KC_BSPC,
     CTL_ESC,   KC_A,   KC_S,   KC_D,   KC_F,   KC_G,   KC_H,   KC_J,   KC_K,   KC_L,   KC_SCLN,  KC_QUOT, KC_ENT,
@@ -13,7 +13,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_CAPS,  KC_LALT,  KC_LGUI,  KC_SPC,      RAISE,      KC_SPC,  KC_LGUI, KC_RALT,           KC_LEFT, KC_DOWN, KC_RIGHT
   ),
 
-  [_RAISE] = LAYOUT_hhkb_arrow(
+  [RAISE_LAYER] = LAYOUT_hhkb_arrow(
     _______,  _______,  _______,  _______, SCR, SCR_SEL, SCR_SEL_CP,  _______,  KC_MPRV,   KC_MPLY,  KC_MNXT, KC_VOLD, KC_VOLU, _______, _______,
     RESET,  KC_F1,  KC_F2,  KC_F3,  KC_F4,   _______,   _______,   KC_UNDS,   KC_PLUS,   KC_LCBR,   KC_RCBR,   _______, _______, KC_DEL,
     _______,  KC_F5,   KC_F6,   KC_F7,   KC_F8,   _______,   _______,   KC_MINS,   KC_EQL,   KC_LBRC, KC_RBRC,  _______, _______,
@@ -21,15 +21,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______,  _______,  _______, _______,      _______,         _______,               _______, _______,    KC_HOME, KC_PGDN, KC_END
   ),
 
-  [_WINDOWS] = LAYOUT_hhkb_arrow(
+  [WINDOWS_LAYER] = LAYOUT_hhkb_arrow(
     KC_ESC,    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_GRV,
     _______,   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
     KC_LCTL,   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
     _______,   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
-    MO(_WINDOWS_RAISE),  KC_LGUI,  KC_LALT,  _______,      _______,      _______,  KC_LALT, KC_LGUI,  _______, _______, _______
+    MO(WINDOWS_RAISE),  KC_LGUI,  KC_LALT,  _______,      _______,      _______,  KC_LALT, KC_LGUI,  _______, _______, _______
   ),
 
-  [_WINDOWS_RAISE] = LAYOUT_hhkb_arrow(
+  [WINDOWS_RAISE] = LAYOUT_hhkb_arrow(
     KC_GRV,  KC_F1,  KC_F2,  KC_F3, KC_F4, KC_F5, KC_F6, KC_F7,  KC_F8,   KC_F9,  KC_F10, KC_F11, KC_F12, KC_VOLD, KC_VOLU,
     _______,  _______,  _______, _______,  _______,   _______,   _______,   _______,   _______,   _______,  _______,  _______, _______, KC_DEL,
     _______,  _______,  _______, _______,  _______,   _______,   _______,   _______,   _______,   _______,  _______,  _______, _______,
@@ -37,7 +37,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______,  _______,  _______, _______,  _______,   _______,               _______, _______,             KC_HOME, KC_PGDN, KC_END
   ),
 
-  [_ADJUST] = LAYOUT_hhkb_arrow(
+  [ADJUST_LAYER] = LAYOUT_hhkb_arrow(
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
     RESET,  _______, _______,   _______,  _______,  _______,   _______,   _______,   _______,   _______,   _______,   _______, _______, _______,
     _______,   _______,   _______,   _______,   _______,   _______,   _______,   _______,   _______,   _______,   _______,  _______, _______,

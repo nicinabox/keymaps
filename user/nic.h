@@ -7,6 +7,7 @@ enum userspace_keycodes
 {
   QWERTY = SAFE_RANGE,
   WINDOWS,
+  EXTEND,
   LOWER,
   RAISE,
   ADJUST,
@@ -24,14 +25,16 @@ enum userspace_keycodes
 
 enum userspace_layers
 {
-  _QWERTY = 0,
-  _WINDOWS,
-  _GAMEPAD,
-  _NUMPAD,
-  _F_KEYS,
-  _LOWER,
-  _RAISE,
-  _ADJUST,
+  QWERTY_LAYER = 0,
+  COLEMAK_LAYER,
+  WINDOWS_LAYER,
+  GAMEPAD_LAYER,
+  NUMPAD_LAYER,
+  F_KEYS_LAYER,
+  EXTEND_LAYER,
+  LOWER_LAYER,
+  RAISE_LAYER,
+  ADJUST_LAYER,
   USER_SAFE_LAYER,
 };
 
