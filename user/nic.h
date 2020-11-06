@@ -45,22 +45,24 @@ extern volatile uint16_t encoder_mode;
 void set_encoder_mode(uint16_t);
 void cycle_encoder_mode(bool);
 
-#define LO_TAB      LT(_LOWER, KC_TAB)
-#define HYPER_TAB   ALL_T(KC_TAB)
+#define HYP_TAB     ALL_T(KC_TAB)
 
-#define LO_Z        LT(_LOWER, KC_Z)
-#define LO_SLSH     LT(_LOWER, KC_SLSH)
+#define LO_TAB      LT(LOWER_LAYER, KC_TAB)
+#define LO_Z        LT(LOWER_LAYER, KC_Z)
+#define LO_SLSH     LT(LOWER_LAYER, KC_SLSH)
+
+#define TG_ADJ      TG(ADJUST_LAYER)
 
 #define ALT_TAB     LALT_T(KC_TAB)
 #define ALT_DEL     LALT_T(KC_DEL)
 
 #define TMUX        LCTL(KC_B)
-#define LOCK        LGUI(LCTL(KC_Q))
-
 #define CTL_ESC     CTL_T(KC_ESC)
-#define GUI_CAPS    RGUI_T(KC_CAPS)
+
 #define RSFT_SLSH   RSFT_T(KC_SLSH)
 
+#define GUI_CAPS    RGUI_T(KC_CAPS)
+#define LOCK        LGUI(LCTL(KC_Q))
 #define SCR         LGUI(LSFT(KC_3))
 #define SCR_SEL     LGUI(LSFT(KC_4))
 #define SCR_SEL_CP  LGUI(LCTL(LSFT(KC_4)))
