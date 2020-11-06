@@ -45,6 +45,9 @@ extern volatile uint16_t encoder_mode;
 void set_encoder_mode(uint16_t);
 void cycle_encoder_mode(bool);
 
+#define DF_QWERTY   DF(QWERTY_LAYER)
+#define DF_COLEMAK  DF(COLEMAK_LAYER)
+
 #define HYP_TAB     ALL_T(KC_TAB)
 
 #define LO_TAB      LT(LOWER_LAYER, KC_TAB)
