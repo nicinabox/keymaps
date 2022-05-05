@@ -48,7 +48,7 @@ class QmkBuilder(object):
 
     def _cleanup(self):
         for k, v in keyboard_paths.items():
-            if os.path.exists(self.qmk_keymap_dir):
+            if os.path.exists(os.path.join(self.qmk_keyboards_dir, v)):
               shutil.rmtree(os.path.join(self.qmk_keyboards_dir, v))
 
         if os.path.exists(self.qmk_keymap_dir):
