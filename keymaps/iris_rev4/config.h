@@ -20,7 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #define EE_HANDS
 
-#define TAPPING_TERM 120
+#define TAPPING_TERM 150
 
 #undef RGBLED_NUM
 #define RGBLED_NUM 12
