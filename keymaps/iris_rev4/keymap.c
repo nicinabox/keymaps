@@ -103,9 +103,9 @@ void handle_encoder_mode(bool clockwise) {
       break;
     case ENC_ARROWS_V:
       if (clockwise) {
-        tap_code(KC_UP);
-      } else {
         tap_code(KC_DOWN);
+      } else {
+        tap_code(KC_UP);
       }
       break;
     case ENC_ARROWS_H:

@@ -105,16 +105,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 
 __attribute__ ((weak))
-void encoder_update_user(uint8_t index, bool anticlockwise) {
-  // TODO: clockwise direction is backwards. Update when fixed.
-  bool clockwise = !anticlockwise;
+bool encoder_update_user(uint8_t index, bool clockwise) {
   layer_state_t layer = biton32(layer_state);
 
   // Allow encoder to be used to choose encoder mode
   if (layer == ADJUST_LAYER) {
     cycle_encoder_mode(clockwise);
-    return;
+    return false;
   }
 
-  return handle_encoder_mode(clockwise);
+  handle_encoder_mode(clockwise);
+  return false;
 }
