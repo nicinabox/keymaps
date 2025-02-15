@@ -50,7 +50,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [SPACEFN_LAYER] = KEYMAP( \
   _______,           _______,  M(M_USERNAME),    _______, LGUI(LSFT(KC_4)), LGUI(LCTL(LSFT(KC_4))),  _______, KC_HOME,           KC_UP,   KC_END,   _______, KC_DELETE, \
   _______,           _______,  M(M_RANDDIGIT),   _______, _______,           _______,                KC_PGUP, KC_LEFT,           KC_DOWN, KC_RIGHT, _______, _______, \
-  _______,           _______,  M(M_RANDLETTER),  _______, _______,           _______,                KC_PGDN, LGUI(LSFT(KC_M)),  _______, _______,  _______, RESET, \
+  _______,           _______,  M(M_RANDLETTER),  _______, _______,           _______,                KC_PGDN, LGUI(LSFT(KC_M)),  _______, _______,  _______, QK_BOOT, \
   _______,  _______,  _______,          _______, _______,           _______,                _______, _______,           _______, _______,  _______, _______ \
 ),
 
