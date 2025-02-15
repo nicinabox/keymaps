@@ -9,4 +9,6 @@ keyboard_keymap_paths = {
     "nh60": "handwired/nh60",
     "planck": "planck/rev2",
     "satan": "gh60/satan",
+    "trackball": "ploopyco/trackball",
+    "trackball_nano": "ploopyco/trackball_nano",
 }
