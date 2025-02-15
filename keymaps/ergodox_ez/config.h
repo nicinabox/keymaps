@@ -8,7 +8,7 @@
 
 #define QMK_KEYS_PER_SCAN 4
 #undef DEBOUNCE
-#define DEBOUNCE    25
+#define DEBOUNCE 50
 
 #undef IGNORE_MOD_TAP_INTERRUPT
 
