@@ -4,16 +4,8 @@ My keyboards, keymaps, and utils for qmk_firmware
 
 ## Usage
 
-    ./qmk KEYBOARD build
-    ./qmk KEYBOARD flash
-
-## CLI Development
-
-`keymaps` and `keyboards` contain directory mappings to the qmk keyboard and keymap.
-
-### Submodules
-
-    git submodule update --init --recursive
+    ./build KEYBOARD
+    ./flash KEYBOARD
 
 ## Resources
 
