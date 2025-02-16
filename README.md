@@ -4,8 +4,8 @@ My keyboards, keymaps, and utils for qmk_firmware
 
 ## Usage
 
-    ./build KEYBOARD
-    ./flash KEYBOARD
+    ./build keyboards/NAME
+    ./flash keyboards/NAME
 
 ## Resources
 
