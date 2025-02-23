@@ -1,5 +1,7 @@
 #!/bin/zsh
 
+export QMK_USERSPACE=`pwd`
+
 # Keyboards without a mapping can be organized 1-1 with qmk
 declare -A keyboards=(
   ["bananasplit"]="thevankeyboards/bananasplit"
