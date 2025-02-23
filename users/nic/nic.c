@@ -50,14 +50,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         set_single_persistent_default_layer(QWERTY_LAYER);
       }
       return false;
-      break;
 
     case WINDOWS:
       if (record->event.pressed) {
         set_single_persistent_default_layer(WINDOWS_LAYER);
       }
       return false;
-      break;
 
     case LOWER:
       if (record->event.pressed) {
@@ -68,7 +66,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         update_tri_layer(LOWER_LAYER, RAISE_LAYER, ADJUST_LAYER);
       }
       return false;
-      break;
 
     case RAISE:
       if (record->event.pressed) {
@@ -79,7 +76,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         update_tri_layer(LOWER_LAYER, RAISE_LAYER, ADJUST_LAYER);
       }
       return false;
-      break;
 
     case ADJUST:
       if (record->event.pressed) {
@@ -88,7 +84,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         layer_off(ADJUST_LAYER);
       }
       return false;
-      break;
   }
 
   if (keycode >= MIN_ENCODER_INDEX && keycode <= MAX_ENCODER_INDEX) {

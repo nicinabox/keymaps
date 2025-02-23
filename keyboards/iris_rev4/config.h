@@ -20,7 +20,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #define EE_HANDS
 
-#define TAPPING_TERM 150
+#define TAPPING_TERM 200
+#define HOLD_ON_OTHER_KEY_PRESS
 
 #undef RGBLIGHT_LED_COUNT
 #define RGBLIGHT_LED_COUNT 12
@@ -30,9 +31,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #define RGBLIGHT_EFFECT_STATIC_GRADIENT
 #define RGBLIGHT_EFFECT_BREATHING
-#define RGBLIGHT_EFFECT_CHRISTMAS
 #define RGBLIGHT_EFFECT_RAINBOW_SWIRL
-#define RGBLIGHT_EFFECT_RAINBOW_MOOD
 
 #define NO_ACTION_MACRO
 #define NO_ACTION_FUNCTION
