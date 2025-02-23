@@ -1,4 +1,4 @@
-#include "users/nic/nic.h"
+#include "nic.h"
 
 enum keymap_keycodes {
   WINDOWS_RAISE = USER_SAFE_LAYER

@@ -1,4 +1,4 @@
-#include "users/nic/nic.h"
+#include "nic.h"
 #include "layout.h"
 
 #define SPACEFN LT(RAISE_LAYER, KC_SPC)

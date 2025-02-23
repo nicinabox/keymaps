@@ -1,4 +1,4 @@
-#include "users/nic/nic.h"
+#include "nic.h"
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [QWERTY_LAYER] = LAYOUT_arrow(
